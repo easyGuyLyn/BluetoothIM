@@ -479,11 +479,6 @@ public class BluetoothChatService {
 
         public void run() {
             Log.i(TAG, "BEGIN mConnectedThread");
-            byte[] buffer;
-            int bytes;
-            int availableBytes = 0;//解决buffer被覆盖的问题
-            // Keep listening to the InputStream while connected
-
             int headLength;
             byte[] headBytes_ = new byte[GetBytesWithHeadInfoUtil.HEADLENGTH];//包头的缓冲
             try {
