@@ -35,6 +35,7 @@ import com.example.administrator.myapplication.BluetoothChat.config.MyChatEditTe
 import com.example.administrator.myapplication.BluetoothChat.config.TextChatMessage;
 import com.example.administrator.myapplication.BluetoothChat.config.WaitDialog;
 import com.example.administrator.myapplication.BluetoothChat.model.BluChatMsgBean;
+import com.example.administrator.myapplication.BluetoothChat.tools.AddNotifitionUtil;
 import com.example.administrator.myapplication.BluetoothChat.tools.GetBytesWithHeadInfoUtil;
 import com.example.administrator.myapplication.BluetoothChat.tools.InitEmoViewTools;
 import com.example.administrator.myapplication.BluetoothChat.tools.VocieTouchListener;
@@ -247,6 +248,7 @@ public class BluetoothChatActivity extends BaseActivity {
                         return;
                     }
                     addMsg(beanRead);
+                    AddNotifitionUtil.addNotifition(BluetoothChatActivity.this, beanRead, voiceRecorder);
                     break;
                 case MESSAGE_DEVICE_NAME://获得连接设备名后的回调
                     mConnectedDeviceName = msg.getData().getString(DEVICE_NAME);

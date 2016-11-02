@@ -9,6 +9,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/HeadUpLibrary" />
             <option value="$PROJECT_DIR$/ViewPageIndictorlibrary" />
             <option value="$PROJECT_DIR$/app" />
           </set>

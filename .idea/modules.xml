@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/HeadUpLibrary/HeadUpLibrary.iml" filepath="$PROJECT_DIR$/HeadUpLibrary/HeadUpLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/MyApplication.iml" filepath="$PROJECT_DIR$/MyApplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/ViewPageIndictorlibrary/ViewPageIndictorlibrary.iml" filepath="$PROJECT_DIR$/ViewPageIndictorlibrary/ViewPageIndictorlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
