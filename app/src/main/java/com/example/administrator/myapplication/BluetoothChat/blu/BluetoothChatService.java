@@ -16,12 +16,8 @@
 
 package com.example.administrator.myapplication.BluetoothChat.blu;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.UUID;
 
@@ -33,13 +29,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.util.Log;
 
 import com.example.administrator.myapplication.BluetoothChat.BluetoothChatActivity;
 import com.example.administrator.myapplication.BluetoothChat.tools.GetBytesWithHeadInfoUtil;
 
-import utils.TLogUtils;
 
 /**
  * This class does all the work for setting up and managing Bluetooth
@@ -97,7 +91,6 @@ public class BluetoothChatService {
     private synchronized void setState(int state) {
         if (D) Log.d(TAG, "setState() " + mState + " -> " + state);
         mState = state;
-
         // Give the new state to the Handler so the UI Activity can update
         mHandler.obtainMessage(BluetoothChatActivity.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
     }
@@ -127,9 +120,7 @@ public class BluetoothChatService {
             mConnectedThread.cancel();
             mConnectedThread = null;
         }
-
         setState(STATE_LISTEN);
-
         // Start the thread to listen on a BluetoothServerSocket
         if (mSecureAcceptThread == null) {
             mSecureAcceptThread = new AcceptThread(true);
@@ -157,7 +148,6 @@ public class BluetoothChatService {
                 mConnectThread = null;
             }
         }
-
         // Cancel any thread currently running a connection
         if (mConnectedThread != null) {
             mConnectedThread.cancel();
@@ -271,6 +261,7 @@ public class BluetoothChatService {
         bundle.putString(BluetoothChatActivity.TOAST, "设备: " + mmDevice.getName() + " 连接失败！");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
+        setState(STATE_NONE);
     }
 
     /**
@@ -284,6 +275,7 @@ public class BluetoothChatService {
         bundle.putString(BluetoothChatActivity.DEVICE_ADDRESS, mmSocket.getRemoteDevice().getAddress());
         msg.setData(bundle);
         mHandler.sendMessage(msg);
+        setState(STATE_NONE);
     }
 
     /**
@@ -499,6 +491,7 @@ public class BluetoothChatService {
                     mHandler.sendMessage(msg);
                 }
             } catch (IOException e) {
+                connectionLost(mmSocket);
                 e.printStackTrace();
             }
         }

@@ -8,10 +8,8 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
-import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -41,6 +39,7 @@ import com.example.administrator.myapplication.BluetoothChat.tools.GetBytesWithH
 import com.example.administrator.myapplication.BluetoothChat.tools.InitEmoViewTools;
 import com.example.administrator.myapplication.BluetoothChat.tools.VocieTouchListener;
 import com.example.administrator.myapplication.BluetoothChat.tools.VoiceRecorder;
+import com.example.administrator.myapplication.BluetoothChat.tools.requestPermissoinUtils;
 import com.example.administrator.myapplication.R;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -48,7 +47,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import utils.Base64Utils;
 import utils.BaseActivity;
@@ -119,6 +117,7 @@ public class BluetoothChatActivity extends BaseActivity {
     public final static int VOICE_LONG = 13;
     public final static int VOICE_UP = 14;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 29;
+    public static final int MY_PERMISSIONS_REQUEST_SYSTEM_ALERT_WINDOW = 30;
     //底部
     @Bind(R.id.ll_footer_chat_activity_container)
     LinearLayout ll_footer_chat_activity_container;//底部展开的所有父容器
@@ -216,6 +215,7 @@ public class BluetoothChatActivity extends BaseActivity {
                         /**蓝牙相关*/
                         case BluetoothChatService.STATE_CONNECTED:
                             setStatus(getString(R.string.connecttedTo) + " " + mConnectedDeviceName);
+                            requestPermissoinUtils.requestSystemAlert(BluetoothChatActivity.this);
                             break;
                         case BluetoothChatService.STATE_CONNECTING:
                             setStatus(getString(R.string.connectting));
@@ -256,9 +256,6 @@ public class BluetoothChatActivity extends BaseActivity {
                     ToastUtils.showMsg(msg.getData().getString(TOAST));
                     String adress = msg.getData().getString(DEVICE_ADDRESS);
                     BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(adress);
-                    if (!isDestroyed) {
-                        mChatService.start();// Start the service over to restart listening mode
-                    }
                     break;
                 case MESSAGE_TOAST_CONNECT_FAIL://连接失败的回调
                     if (!isDestroyed) {
@@ -538,13 +535,20 @@ public class BluetoothChatActivity extends BaseActivity {
     public void onRequestPermissionsResult(int requestCode, String permissions[],
                                            int[] grantResults) {
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE: {
+            case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     voiceRecorder.startRecording();
                 } else {
                     ToastUtils.showMsg("你必须允许录音权限才能发送语音");
                 }
-            }
+                break;
+            case MY_PERMISSIONS_REQUEST_SYSTEM_ALERT_WINDOW:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    ToastUtils.showMsg("你已获得通知弹窗权限~~");
+                } else {
+                    ToastUtils.showMsg("你必须允许悬浮窗权限才能弹窗通知~~");
+                }
+                break;
         }
     }
 
