@@ -2,6 +2,7 @@ package com.example.administrator.myapplication.BluetoothChat.tools;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -65,6 +66,12 @@ public class NotifitionManager {
         wl.acquire();
         //点亮屏幕
         wl.release();
+        //解锁
+        KeyguardManager km = (KeyguardManager) activity.getSystemService(Context.KEYGUARD_SERVICE);
+        //得到键盘锁管理器对象
+        KeyguardManager.KeyguardLock kl = km.newKeyguardLock("unLock");
+        //参数是LogCat里用的Tag
+        kl.disableKeyguard();
     }
 
 
