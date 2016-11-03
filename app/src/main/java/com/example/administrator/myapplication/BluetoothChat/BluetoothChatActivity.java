@@ -3,7 +3,10 @@ package com.example.administrator.myapplication.BluetoothChat;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -133,11 +136,12 @@ public class BluetoothChatActivity extends BaseActivity {
     ViewPager pager_emo;  //layoutEmo中管理加载表情的界面的ViewPager
     private List<TextChatMessage> emos;//装载表情图片的列表
     //全局
-    private WaitDialog waitDialog;
-    private ChatAdapter speechAdapter;
-    private List<BluChatMsgBean> mData = new ArrayList<>();
-    private Boolean isNeedSrollByItself = true;
-    private Boolean isDestroyed = false;
+    private WaitDialog waitDialog;//发送消息等待框
+    private ChatAdapter speechAdapter;//聊天列表适配器
+    private List<BluChatMsgBean> mData = new ArrayList<>(); //消息数据源
+    private Boolean isNeedSrollByItself = true; //聊天界面是否自己滚动
+    private Boolean isDestroyed = false; //是否被摧毁
+    private Boolean isScreenOn = true;
 
     @Override
     public void setContentView() {
@@ -248,7 +252,7 @@ public class BluetoothChatActivity extends BaseActivity {
                         return;
                     }
                     addMsg(beanRead);
-                    AddNotifitionUtil.addNotifition(BluetoothChatActivity.this, beanRead, voiceRecorder);
+                    AddNotifitionUtil.addNotifition(BluetoothChatActivity.this, beanRead, voiceRecorder, isScreenOn);
                     break;
                 case MESSAGE_DEVICE_NAME://获得连接设备名后的回调
                     mConnectedDeviceName = msg.getData().getString(DEVICE_NAME);
@@ -416,6 +420,12 @@ public class BluetoothChatActivity extends BaseActivity {
             }
         });
         btn_press_to_speak.setOnTouchListener(new VocieTouchListener(voiceRecorder, recordingHint, recordingContainer, mHandler, this));
+        final IntentFilter filter = new IntentFilter();
+        // 屏幕灭屏广播
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        // 屏幕亮屏广播
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        registerReceiver(mBatInfoReceiver, filter);
     }
 
     protected boolean isSlideToBottom(RecyclerView recyclerView) {//recyclerView是否处于底部
@@ -577,7 +587,28 @@ public class BluetoothChatActivity extends BaseActivity {
         super.onDestroy();
         isDestroyed = true;
         if (mChatService != null) mChatService.stop();
+        unregisterReceiver(mBatInfoReceiver);
     }
+
+    BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            Log.d(TAG, "onReceive");
+            String action = intent.getAction();
+
+            if (Intent.ACTION_SCREEN_ON.equals(action)) {
+                isScreenOn = true;
+                Log.d(TAG, "screen on");
+            } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
+                isScreenOn = false;
+                Log.d(TAG, "screen off");
+            } else if (Intent.ACTION_USER_PRESENT.equals(action)) {
+                Log.d(TAG, "screen unlock");
+            } else if (Intent.ACTION_CLOSE_SYSTEM_DIALOGS.equals(intent.getAction())) {
+                Log.i(TAG, " receive Intent.ACTION_CLOSE_SYSTEM_DIALOGS");
+            }
+        }
+    };
 
     /**
      * 主页面 ,重写 onKeyDown方法

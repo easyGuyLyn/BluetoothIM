@@ -22,7 +22,7 @@ import com.example.administrator.myapplication.R;
 
 public class AddNotifitionUtil {
 
-    public static void addNotifition(final Activity activity, final BluChatMsgBean msg, final VoiceRecorder voiceRecorder) {
+    public static void addNotifition(final Activity activity, final BluChatMsgBean msg, final VoiceRecorder voiceRecorder, Boolean isScreenOn) {
         if (msg == null) {
             return;
         }
@@ -42,11 +42,12 @@ public class AddNotifitionUtil {
                 break;
         }
         final Handler finalHandler = handler;
-        NotifitionManager.getInstance().notifyCustom(activity,
+        NotifitionManager.getInstance().notify(activity,
                 msg.getSender(),
                 "一条新消息！！",
                 R.drawable.ic_app_bg,
-                contentLayoutId,
+                contentLayoutId,      //如果不想有弹窗，就传 0  ，下面的回调方法也不用书写
+                isScreenOn,
                 new NotifitionManager.NotifitionSetView() {
                     @Override
                     public void setView(View v) {

@@ -17,6 +17,8 @@ import com.mingle.headsUp.HeadsUpManager;
 
 import java.util.List;
 
+import utils.TLogUtils;
+
 /**
  * Created by Administrator on 2016/11/2.
  */
@@ -35,20 +37,19 @@ public class NotifitionManager {
     }
 
     /**
-     * 生成一个自定义的弹窗通知
+     * 生成一个通知,可以是简单的通知，也可以是弹窗的自定义通知
      *
      * @param activity
      */
-    public void notifyCustom(final Activity activity, String title, String content, int icon, int custom, NotifitionSetView setViewCallBack) {
+    public void notify(final Activity activity, String title, String content, int icon, int custom, Boolean isScreenOn, NotifitionSetView setViewCallBack) {
 
-        //如果聊天界面在前台，则可以不通知
-        if (isForeground(activity, activity.getLocalClassName())) {
+        //如果聊天界面在前台且亮屏，则可以不通知
+        TLogUtils.i("notify_status", isForeground(activity, activity.getLocalClassName()) + "//" + isScreenOn);
+        if (isForeground(activity, activity.getLocalClassName()) && isScreenOn) {
             return;
         }
         PendingIntent pendingIntent = PendingIntent.getActivity(activity, 11, new Intent(activity, activity.getClass()), PendingIntent.FLAG_UPDATE_CURRENT);
         final HeadsUpManager manage1 = HeadsUpManager.getInstant(activity.getApplication());
-        View view = activity.getLayoutInflater().inflate(custom, null);
-        setViewCallBack.setView(view);
         HeadsUp headsUp1 = new HeadsUp.Builder(activity)
                 .setContentTitle(title).setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS)
                 //要显示通知栏通知,这个一定要设置
@@ -57,7 +58,11 @@ public class NotifitionManager {
                 .setContentIntent(pendingIntent)
                 .setContentText(content)
                 .buildHeadUp();
-        headsUp1.setCustomView(view);
+        if (custom != 0) {
+            View view = activity.getLayoutInflater().inflate(custom, null);
+            setViewCallBack.setView(view);
+            headsUp1.setCustomView(view);
+        }
         manage1.notify(code++, headsUp1);
         //获取电源管理器对象
         PowerManager pm = (PowerManager) activity.getSystemService(Context.POWER_SERVICE);
@@ -90,7 +95,6 @@ public class NotifitionManager {
         if (context == null || TextUtils.isEmpty(className)) {
             return false;
         }
-
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(1);
         if (list != null && list.size() > 0) {
@@ -99,7 +103,6 @@ public class NotifitionManager {
                 return true;
             }
         }
-
         return false;
     }
 }
