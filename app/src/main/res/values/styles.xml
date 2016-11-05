@@ -39,6 +39,14 @@
         <item name="android:windowBackground">@color/transparent</item><!--背景透明-->
         <item name="android:backgroundDimEnabled">false</item><!--模糊-->
     </style>
+
+    <style name="LiveActivityStyle" >
+        <item name="android:windowBackground">@null</item><!--无背景-->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+
     <!--Dialog的自定义位置显示-->
     <style name="MyDialogStyleBottom" parent="android:Theme.Dialog">
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>

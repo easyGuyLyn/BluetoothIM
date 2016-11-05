@@ -141,7 +141,7 @@ public class BluetoothChatActivity extends BaseActivity {
     private List<BluChatMsgBean> mData = new ArrayList<>(); //消息数据源
     private Boolean isNeedSrollByItself = true; //聊天界面是否自己滚动
     private Boolean isDestroyed = false; //是否被摧毁
-    private Boolean isScreenOn = true;
+    private Boolean isScreenOn = true; //屏幕是否亮着
 
     @Override
     public void setContentView() {
@@ -599,6 +599,7 @@ public class BluetoothChatActivity extends BaseActivity {
             if (Intent.ACTION_SCREEN_ON.equals(action)) {
                 isScreenOn = true;
                 Log.d(TAG, "screen on");
+
             } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
                 isScreenOn = false;
                 Log.d(TAG, "screen off");
@@ -613,22 +614,14 @@ public class BluetoothChatActivity extends BaseActivity {
     /**
      * 主页面 ,重写 onKeyDown方法
      */
-    private long exitTime = 0;
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            //两秒之内按返回键就会退出
-            if ((System.currentTimeMillis() - exitTime) > 2000) {
-                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
-                exitTime = System.currentTimeMillis();
-            } else {
-                //这里使用home键，永远只是调到后台而已 ，不finish
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //如果是服务里调用，必须加入new task标识
-                intent.addCategory(Intent.CATEGORY_HOME);
-                startActivity(intent);
-            }
+            //这里使用home键，永远只是调到后台而已 ，不finish
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //如果是服务里调用，必须加入new task标识
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
             return true;
         }
         return super.onKeyDown(keyCode, event);

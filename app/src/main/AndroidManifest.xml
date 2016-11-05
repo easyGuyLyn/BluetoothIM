@@ -95,10 +95,6 @@
             android:label="炫酷切图"
             android:theme="@style/AppTheme" />
         <!-- JellyViewPager -->
-        <!-- 渐变actionbar -->
-
-
-        <!-- 渐变actionbar -->
         <!-- notBoringactionbar -->
         <activity
             android:name=".notboringactionbar.NoBoringActionBarActivity"
@@ -210,6 +206,15 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/select_device"
             android:theme="@style/AppTheme.hasActionBarDialog" />
+        <!-- 应用保活 -->
+        <activity
+            android:name=".BluetoothChat.KeepLiveActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleInstance"
+            android:process=":live"
+            android:theme="@style/LiveActivityStyle"></activity>
     </application>
 
 </manifest>
