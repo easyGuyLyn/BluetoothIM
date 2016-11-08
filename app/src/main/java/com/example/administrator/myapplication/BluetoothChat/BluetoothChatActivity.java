@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -87,16 +86,12 @@ public class BluetoothChatActivity extends BaseActivity {
     private BluetoothChatService mChatService = null;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
     @Bind(R.id.rv_speech)
     RecyclerView rv_speech; //聊天列表
     @Bind(R.id.rl_chat_control)
     LinearLayout rl_chat_control;
     @Bind(R.id.btn_send)
     TextView btn_send; //发送按钮
-    @Bind(R.id.btn_more)
-    ImageView btn_more; //更多按钮
     //文字
     @Bind(R.id.edittext_layout)
     RelativeLayout edittext_layout;
@@ -122,19 +117,28 @@ public class BluetoothChatActivity extends BaseActivity {
     public final static int VOICE_UP = 14;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 29;
     public static final int MY_PERMISSIONS_REQUEST_SYSTEM_ALERT_WINDOW = 30;
-    //底部
+    //底部隐藏部分
     @Bind(R.id.ll_footer_chat_activity_container)
     LinearLayout ll_footer_chat_activity_container;//底部展开的所有父容器
     @Bind(R.id.rl_footer_chat_activity_container_emo)
     RelativeLayout rl_footer_chat_activity_container_emo;//表情面板的容器
+    @Bind(R.id.rl_footer_chat_activity_container_more)
+    RelativeLayout rl_footer_chat_activity_container_more;//表情面板的容器
     //表情
     @Bind(R.id.iv_emoticons)
-    ImageView iv_emoticons; //呼唤表情面板按钮
+    ImageView iv_emoticons; //表情按钮
     @Bind(R.id.cpi_footer_chat_activity_emo_indicator)
     CirclePageIndicator cip;  //ViewPager中的界面圆形界面指示器（第三方类库）
     @Bind(R.id.vp_footer_chat_activity_pager_emo)
     ViewPager pager_emo;  //layoutEmo中管理加载表情的界面的ViewPager
     private List<TextChatMessage> emos;//装载表情图片的列表
+    //更多
+    @Bind(R.id.btn_more)
+    ImageView btn_more; //更多按钮
+    @Bind(R.id.cpi_footer_chat_activity_more_indicator)
+    CirclePageIndicator cop;  //ViewPager中的界面圆形界面指示器（第三方类库）
+    @Bind(R.id.vp_footer_chat_activity_pager_more)
+    ViewPager pager_more;  //管理加载更多界面的ViewPager
     //全局
     private WaitDialog waitDialog;//发送消息等待框
     private ChatAdapter speechAdapter;//聊天列表适配器
@@ -455,18 +459,30 @@ public class BluetoothChatActivity extends BaseActivity {
 
     @OnClick(R.id.btn_more)
     public void setToMore() {
-        ToastUtils.showMsg("暂不支持更多功能~");
+        bottomShow(2);
     }
 
     @OnClick(R.id.iv_emoticons)
     public void setToEmj() {
-        et_sendmessage.requestFocus();
+        bottomShow(1);
+    }
+
+    public void bottomShow(int type) { //底部视图逻辑，type 1 为表情， 2 为更多
+        final View view;
+        if (type == 1) {
+            view = rl_footer_chat_activity_container_emo;
+            rl_footer_chat_activity_container_more.setVisibility(View.GONE);
+            et_sendmessage.requestFocus();
+        } else {
+            view = rl_footer_chat_activity_container_more;
+            rl_footer_chat_activity_container_emo.setVisibility(View.GONE);
+        }
         if (ll_footer_chat_activity_container.getVisibility() == View.VISIBLE) {
-            if (rl_footer_chat_activity_container_emo.getVisibility() == View.VISIBLE) {
+            if (view.getVisibility() == View.VISIBLE) {
                 ll_footer_chat_activity_container.setVisibility(View.GONE);
-                rl_footer_chat_activity_container_emo.setVisibility(View.GONE);
+                view.setVisibility(View.GONE);
             } else {
-                rl_footer_chat_activity_container_emo.setVisibility(View.VISIBLE);
+                view.setVisibility(View.VISIBLE);
             }
         } else {
             if (getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
@@ -475,12 +491,12 @@ public class BluetoothChatActivity extends BaseActivity {
                     @Override
                     public void run() {
                         ll_footer_chat_activity_container.setVisibility(View.VISIBLE);
-                        rl_footer_chat_activity_container_emo.setVisibility(View.VISIBLE);
+                        view.setVisibility(View.VISIBLE);
                     }
                 }, 200);
             } else {
                 ll_footer_chat_activity_container.setVisibility(View.VISIBLE);
-                rl_footer_chat_activity_container_emo.setVisibility(View.VISIBLE);
+                view.setVisibility(View.VISIBLE);
             }
         }
     }

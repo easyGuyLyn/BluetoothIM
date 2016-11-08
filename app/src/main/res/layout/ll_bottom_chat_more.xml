@@ -36,10 +36,9 @@
 
         <!-- 当按下了 “更多”按钮的时候，会出现 footer_chat_add_expand_layout，供用户发送图片、位置和拍照 -->
 
-        <!--<include
+        <include
             android:id="@+id/include_in_footer_chat_activity_layout_addmore"
-            layout="@layout/footer_chat_add_expand_layout"
-            android:visibility="gone" />-->
+            layout="@layout/footer_chat_add_expand_layout" />
     </LinearLayout>
 
 </LinearLayout>
