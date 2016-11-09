@@ -44,6 +44,7 @@ import com.example.administrator.myapplication.BluetoothChat.tools.VocieTouchLis
 import com.example.administrator.myapplication.BluetoothChat.tools.VoiceRecorder;
 import com.example.administrator.myapplication.BluetoothChat.tools.requestPermissoinUtils;
 import com.example.administrator.myapplication.R;
+import com.example.administrator.myapplication.weixinPhotoPicker.photopicker.PhotoPickerActivity;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -138,6 +139,8 @@ public class BluetoothChatActivity extends BaseActivity {
     CirclePageIndicator cop;  //ViewPager中的界面圆形界面指示器（第三方类库）
     @Bind(R.id.vp_footer_chat_activity_pager_more)
     ViewPager pager_more;  //管理加载更多界面的ViewPager
+    public static final int REQUEST_CAMERA_CODE = 10;
+    private ArrayList<String> imagePaths = new ArrayList<>(); //图片
     //全局
     private WaitDialog waitDialog;//发送消息等待框
     private ChatAdapter speechAdapter;//聊天列表适配器
@@ -202,7 +205,7 @@ public class BluetoothChatActivity extends BaseActivity {
         InitEmoViewTools.initEmoView(this, pager_emo, cip, et_sendmessage);//初始化表情相关业务
         micImages = new Drawable[]{getResources().getDrawable(R.drawable.record_animate_01), getResources().getDrawable(R.drawable.record_animate_02), getResources().getDrawable(R.drawable.record_animate_03), getResources().getDrawable(R.drawable.record_animate_04), getResources().getDrawable(R.drawable.record_animate_05), getResources().getDrawable(R.drawable.record_animate_06), getResources().getDrawable(R.drawable.record_animate_07), getResources().getDrawable(R.drawable.record_animate_08)};
         voiceRecorder = new VoiceRecorder(BluetoothChatActivity.this, mHandler); //初始化语音相关
-        InitMoreViewTools.initMoreView(this, pager_more, cop);//初始化更多模块
+        InitMoreViewTools.initMoreView(this, pager_more, cop, imagePaths);//初始化更多模块
     }
 
     public void setupTask() {
@@ -366,6 +369,10 @@ public class BluetoothChatActivity extends BaseActivity {
                     ToastUtils.showMsg(getString(R.string.Bluetoothisnotavailable));
                     finish();
                 }
+                break;
+            case REQUEST_CAMERA_CODE:
+                sendPicMsg(data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT));
+                break;
         }
     }
 
@@ -527,6 +534,18 @@ public class BluetoothChatActivity extends BaseActivity {
     }
 
     public void sendVoiceMsg(final String voiceFilePath, final int length) {//发送一条语音
+        sendBase64File(3, voiceFilePath, length);
+    }
+
+    public void sendPicMsg(List<String> filePaths) { //发送一个图片
+        if (filePaths == null || filePaths.size() == 0) {
+            return;
+        }
+        String filePath = filePaths.get(0);
+        sendBase64File(2, filePath, -1); //图片无时长
+    }
+
+    public void sendBase64File(final int type, final String filePath, final int length) {  //发送一个base64文件
         waitDialog.sendMsg();
         if (mChatService.getState() != BluetoothChatService.STATE_CONNECTED) {
             waitDialog.dismiss();
@@ -538,13 +557,13 @@ public class BluetoothChatActivity extends BaseActivity {
             public void run() {
                 String encode = null;
                 try {
-                    encode = Base64Utils.encodeBase64File(voiceFilePath);   //语音暂时用Base64  问题不大
+                    encode = Base64Utils.encodeBase64File(filePath);   //语音暂时用Base64  问题不大
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 if (encode.length() > 0) {
-                    BluChatMsgBean sendBean = new BluChatMsgBean("3", mConnectedDeviceName, encode, System.currentTimeMillis() + "", mLocalDeviceName);
-                    sendBean.setFilePath(voiceFilePath);
+                    BluChatMsgBean sendBean = new BluChatMsgBean(type + "", mConnectedDeviceName, encode, System.currentTimeMillis() + "", mLocalDeviceName);
+                    sendBean.setFilePath(filePath);
                     sendBean.setVoiceLength(length + "");
                     String json = GsonUtil.GsonString(sendBean);
                     mChatService.write(json, GetBytesWithHeadInfoUtil.getByteArry(json));

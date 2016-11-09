@@ -7,4 +7,6 @@ public class CacheConfig {
 
     //录音的缓存文件夹
     public final static String VOICE_BLU = "voice_blu: ";
+    //图片的缓存文件夹
+    public final static String PIC_BLU = "pic_blu: ";
 }

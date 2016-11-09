@@ -19,7 +19,6 @@ public class SpalshActivity extends BaseActivity {
 
     @Bind(R.id.load_eat)
     WSEatBeans loadEat;
-   // private WSEatBeans loadEat;
     private Handler handler;
     /**
      * 延时加载
@@ -29,7 +28,6 @@ public class SpalshActivity extends BaseActivity {
     @Override
     public void setContentView() {
         setContentView(R.layout.acticity_spalsh);
-      //  loadEat = (WSEatBeans) findViewById(R.id.load_eat);
     }
 
     @Override

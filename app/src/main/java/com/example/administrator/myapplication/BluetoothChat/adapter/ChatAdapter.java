@@ -18,6 +18,7 @@ import com.example.administrator.myapplication.BluetoothChat.config.CommonViewHo
 import com.example.administrator.myapplication.BluetoothChat.config.TimeShowUtil;
 import com.example.administrator.myapplication.BluetoothChat.model.BluChatMsgBean;
 import com.example.administrator.myapplication.BluetoothChat.tools.GetVoiceFilePathUtil;
+import com.example.administrator.myapplication.BluetoothChat.tools.ShowPicUtil;
 import com.example.administrator.myapplication.BluetoothChat.tools.VoiceClickPlayUtil;
 import com.example.administrator.myapplication.BluetoothChat.tools.VoiceRecorder;
 import com.example.administrator.myapplication.R;
@@ -61,8 +62,10 @@ public class ChatAdapter extends RecyclerView.Adapter {
             else
                 return TYPE_TEXT_RECEIVE;
         } else if (msg.getContentType().equals("2")) {//图片
-            // TODO: 2016/10/31
-
+            if (msg.getSender().equals(mLocalDeviceName))
+                return TYPE_PIC_SEND;
+            else
+                return TYPE_PIC_RECEIVE;
         } else if (msg.getContentType().equals("3")) {//语音
             if (msg.getSender().equals(mLocalDeviceName))
                 return TYPE_VOCICE_SEND;
@@ -86,6 +89,10 @@ public class ChatAdapter extends RecyclerView.Adapter {
                 return new CommonViewHolder(View.inflate(mContext, R.layout.item_blu_chat_voice_send, null));
             case TYPE_VOICE_RECEIVE:
                 return new CommonViewHolder(View.inflate(mContext, R.layout.item_blu_chat_voice_receive, null));
+            case TYPE_PIC_SEND:
+                return new CommonViewHolder(View.inflate(mContext, R.layout.item_blu_chat_pic_send, null));
+            case TYPE_PIC_RECEIVE:
+                return new CommonViewHolder(View.inflate(mContext, R.layout.item_blu_chat_pic_receive, null));
         }
 
         return null;
@@ -105,6 +112,12 @@ public class ChatAdapter extends RecyclerView.Adapter {
         ProgressBar pb_outgoing = viewHolder.getPb(R.id.pb_outgoing);//加载进度条
         RelativeLayout rl_voice_play = viewHolder.getRl(R.id.rl_voice_play);//点击播放区域
         ImageView iv_audio = viewHolder.getIv(R.id.iv_audio);//播放桢动图
+
+        /**
+         * 图片的视图
+         */
+        ImageView iv_pic = viewHolder.getIv(R.id.iv_pic);
+
 
         switch (getItemViewType(position)) {
             case TYPE_TEXT_SEND:
@@ -128,6 +141,14 @@ public class ChatAdapter extends RecyclerView.Adapter {
                 tv_voicePlay_duration.setText(message.getVoiceLength());
                 String voiceFilePath1 = GetVoiceFilePathUtil.initVoice(displayMetrics, handler, mContext, message, ll_voice_info, pb_outgoing, rl_voice_play);
                 VoiceClickPlayUtil.doPlay(false, mVoiceRecorder, rl_voice_play, iv_audio, voiceFilePath1);
+                break;
+            case TYPE_PIC_SEND:
+                viewHolder.getTv(R.id.tv_name).setText("我");
+                ShowPicUtil.showPic(handler, mContext, message, pb_outgoing, iv_pic);
+                break;
+            case TYPE_PIC_RECEIVE:
+                viewHolder.getTv(R.id.tv_name).setText(connectDeviceName);
+                ShowPicUtil.showPic(handler, mContext, message, pb_outgoing, iv_pic);
                 break;
         }
     }

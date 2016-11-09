@@ -35,7 +35,7 @@ public class AddNotifitionUtil {
                 contentLayoutId = R.layout.item_blu_chat_text_receive;
                 break;
             case "2":
-                contentLayoutId = R.layout.item_blu_chat_text_receive;
+                contentLayoutId = R.layout.item_blu_chat_pic_receive;
                 break;
             case "3":
                 contentLayoutId = R.layout.item_blu_chat_voice_receive;
@@ -46,7 +46,7 @@ public class AddNotifitionUtil {
                 msg.getSender(),
                 "一条新消息！！",
                 R.drawable.ic_app_bg,
-                contentLayoutId,      //如果不想有弹窗，就传 0  ，下面的回调方法也不用书写
+                contentLayoutId,      //如果不想有弹窗，这个参数就传 0  ，下面的回调方法也不用书写
                 isScreenOn,
                 new NotifitionManager.NotifitionSetView() {
                     @Override
@@ -61,7 +61,9 @@ public class AddNotifitionUtil {
                                 tv_text.setText(ChatMessageUtils.toSpannableString(activity, msg.getContent()));
                                 break;
                             case "2":
-
+                                ProgressBar pb_outgoing1 = (ProgressBar) v.findViewById(R.id.pb_outgoing);//加载进度条
+                                ImageView iv_pic = (ImageView) v.findViewById(R.id.iv_pic);//图片
+                                ShowPicUtil.showPic(finalHandler, activity, msg, pb_outgoing1, iv_pic);
                                 break;
                             case "3":
                                 LinearLayout ll_voice_info = (LinearLayout) v.findViewById(R.id.ll_voice_info);//语音信息
