@@ -2,9 +2,8 @@
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <stroke
-                android:width="1px"
-                android:color="@color/colorShadow" />
-            <corners android:radius="0dp" />
+                android:width="5px"
+                android:color="@color/photopicker_background" />
         </shape>
     </item>
 </layer-list>

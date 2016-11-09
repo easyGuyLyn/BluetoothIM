@@ -6,6 +6,6 @@
 
     <corners android:radius="2dp" />
 
-    <stroke android:width="1px" android:color="@color/colorShadow" />
+    <stroke android:width="5px" android:color="@color/photopicker_background" />
 
 </shape>
