@@ -34,7 +34,6 @@ import android.widget.Toast;
 import com.example.administrator.myapplication.BluetoothChat.adapter.ChatAdapter;
 import com.example.administrator.myapplication.BluetoothChat.blu.BluetoothChatService;
 import com.example.administrator.myapplication.BluetoothChat.config.MyChatEditText;
-import com.example.administrator.myapplication.BluetoothChat.config.TextChatMessage;
 import com.example.administrator.myapplication.BluetoothChat.config.WaitDialog;
 import com.example.administrator.myapplication.BluetoothChat.model.BluChatMsgBean;
 import com.example.administrator.myapplication.BluetoothChat.tools.AddNotifitionUtil;

@@ -38,7 +38,6 @@ public class MoreGridAdapter extends ListAdapter<MoreBean> {
         vh.iv.setBackgroundResource(bean.getDrawabeResourcecId());
         vh.tv.setText(bean.getTaskName());
 
-
         return convertView;
     }
 

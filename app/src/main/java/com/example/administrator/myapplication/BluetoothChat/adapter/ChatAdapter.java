@@ -34,6 +34,8 @@ public class ChatAdapter extends RecyclerView.Adapter {
     private static final int TYPE_TEXT_RECEIVE = 1;
     private static final int TYPE_VOCICE_SEND = 2;
     private static final int TYPE_VOICE_RECEIVE = 3;
+    private static final int TYPE_PIC_SEND = 4;
+    private static final int TYPE_PIC_RECEIVE = 5;
     private Context mContext;
     private List<BluChatMsgBean> mData;
     private String mLocalDeviceName = null;
