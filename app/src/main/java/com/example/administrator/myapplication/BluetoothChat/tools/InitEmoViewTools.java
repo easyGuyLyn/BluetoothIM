@@ -26,10 +26,10 @@ import java.util.List;
 
 public class InitEmoViewTools {
 
-    public static void initEmoView(Context context, List<TextChatMessage> emos, ViewPager pager_emo, CirclePageIndicator cip, MyChatEditText et_sendmessage) {
+    public static void initEmoView(Context context, ViewPager pager_emo, CirclePageIndicator cip, MyChatEditText et_sendmessage) {
 
         /**初始时表情文件列表*/
-        emos = ChatMessageUtils.textChatMessages;
+        List<TextChatMessage> emos = ChatMessageUtils.textChatMessages;
 
         /**里面装两个R.layout.emo_gridview_layout*/
         List<View> views = new ArrayList<>();

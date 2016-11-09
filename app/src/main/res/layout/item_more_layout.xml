@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_item_more_layout"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_app_bg" />
+
+    <TextView
+        android:id="@+id/tv_item_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="更多demo"
+        android:textColor="@color/ygtext_color"
+        android:textSize="11dp"
+        android:textStyle="bold" />
+</LinearLayout>

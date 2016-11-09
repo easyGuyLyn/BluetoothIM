@@ -40,6 +40,7 @@ import com.example.administrator.myapplication.BluetoothChat.model.BluChatMsgBea
 import com.example.administrator.myapplication.BluetoothChat.tools.AddNotifitionUtil;
 import com.example.administrator.myapplication.BluetoothChat.tools.GetBytesWithHeadInfoUtil;
 import com.example.administrator.myapplication.BluetoothChat.tools.InitEmoViewTools;
+import com.example.administrator.myapplication.BluetoothChat.tools.InitMoreViewTools;
 import com.example.administrator.myapplication.BluetoothChat.tools.VocieTouchListener;
 import com.example.administrator.myapplication.BluetoothChat.tools.VoiceRecorder;
 import com.example.administrator.myapplication.BluetoothChat.tools.requestPermissoinUtils;
@@ -131,7 +132,6 @@ public class BluetoothChatActivity extends BaseActivity {
     CirclePageIndicator cip;  //ViewPager中的界面圆形界面指示器（第三方类库）
     @Bind(R.id.vp_footer_chat_activity_pager_emo)
     ViewPager pager_emo;  //layoutEmo中管理加载表情的界面的ViewPager
-    private List<TextChatMessage> emos;//装载表情图片的列表
     //更多
     @Bind(R.id.btn_more)
     ImageView btn_more; //更多按钮
@@ -200,9 +200,10 @@ public class BluetoothChatActivity extends BaseActivity {
             finish();
             return;
         }
-        InitEmoViewTools.initEmoView(this, emos, pager_emo, cip, et_sendmessage);//初始化表情相关业务
+        InitEmoViewTools.initEmoView(this, pager_emo, cip, et_sendmessage);//初始化表情相关业务
         micImages = new Drawable[]{getResources().getDrawable(R.drawable.record_animate_01), getResources().getDrawable(R.drawable.record_animate_02), getResources().getDrawable(R.drawable.record_animate_03), getResources().getDrawable(R.drawable.record_animate_04), getResources().getDrawable(R.drawable.record_animate_05), getResources().getDrawable(R.drawable.record_animate_06), getResources().getDrawable(R.drawable.record_animate_07), getResources().getDrawable(R.drawable.record_animate_08)};
-        voiceRecorder = new VoiceRecorder(BluetoothChatActivity.this, mHandler); /*初始化语音相关*/
+        voiceRecorder = new VoiceRecorder(BluetoothChatActivity.this, mHandler); //初始化语音相关
+        InitMoreViewTools.initMoreView(this, pager_more, cop);//初始化更多模块
     }
 
     public void setupTask() {
