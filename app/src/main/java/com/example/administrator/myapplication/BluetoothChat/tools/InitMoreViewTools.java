@@ -31,8 +31,11 @@ public class InitMoreViewTools {
          * 数据源   在这里添加更多里的业务
          */
         List<MoreBean> mores = new ArrayList<>();
-        MoreBean data1 = new MoreBean("更多demo", R.drawable.ic_app_bg);
+        MoreBean data1 = new MoreBean("demo", R.mipmap.ic_more_demo);
+        MoreBean data2 = new MoreBean("图片", R.mipmap.ic_photo);
         mores.add(data1);
+        mores.add(data2);
+
         /**
          *viewPager的页
          */
@@ -59,6 +62,9 @@ public class InitMoreViewTools {
                     case 0:
                         Intent intent = new Intent(context, DemoActivity.class);
                         context.startActivity(intent);
+                        break;
+                    case 1:
+
                         break;
                 }
             }
