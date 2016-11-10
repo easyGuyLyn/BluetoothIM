@@ -259,6 +259,7 @@
     <string name="Bluetoothisnotavailable" translatable="false">蓝牙异常不可用...</string>
     <string name="notConnect" translatable="false">未连接设备</string>
     <string name="connectting" translatable="false">正在连接设备...</string>
+    <string name="listenning" translatable="false">正在搜索设备...</string>
     <string name="connecttedTo" translatable="false">已连接 -> </string>
     <!--  DeviceListActivity -->
     <string name="scanning" translatable="false">正在寻找设备...</string>

@@ -18,7 +18,7 @@ import utils.Base64Utils;
 import utils.FileUtil;
 import utils.LYNBitmapUtils;
 import utils.ThreadUtils;
-import utils.image.GlideUtils;
+import utils.GlideUtils;
 
 /**
  * Created by 46404 on 2016/11/9.
@@ -46,7 +46,6 @@ public class ShowPicUtil {
                                 } else {
                                     iv_pic.setImageBitmap(LYNBitmapUtils.getSampleSizeBitmap(filePath, (Activity) mContext));
                                 }
-
                             }
                         }
                     };

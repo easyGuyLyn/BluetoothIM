@@ -36,9 +36,10 @@ public class InitMoreViewTools {
         List<MoreBean> mores = new ArrayList<>();
         MoreBean data1 = new MoreBean("demo", R.mipmap.ic_more_demo);
         MoreBean data2 = new MoreBean("图片", R.mipmap.ic_photo);
+        MoreBean data3 = new MoreBean("小视频", R.mipmap.ic_vedio);
         mores.add(data1);
         mores.add(data2);
-
+        mores.add(data3);
         /**
          *viewPager的页
          */
@@ -74,6 +75,7 @@ public class InitMoreViewTools {
                         intent1.setSelectedPaths(imagePaths); // 已选中的照片地址， 用于回显选中状态
                         ((Activity) context).startActivityForResult(intent1, BluetoothChatActivity.REQUEST_CAMERA_CODE);
                         break;
+
                 }
             }
         });

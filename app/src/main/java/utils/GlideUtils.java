@@ -1,4 +1,4 @@
-package utils.image;
+package utils;
 
 
 import android.content.Context;

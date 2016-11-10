@@ -52,7 +52,8 @@
                     android:id="@+id/ll_photopicke"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item">
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -73,7 +74,8 @@
                     android:id="@+id/ll_crop"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item">
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -94,7 +96,8 @@
                     android:id="@+id/ll_cropAsWeixin"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item">
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -137,7 +140,8 @@
                     android:id="@+id/ll_JellyViewPager"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item">
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -159,7 +163,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
                     android:background="@drawable/selector_listview_item"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -179,7 +184,8 @@
                     android:id="@+id/ll_NotBoringActionBar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item">
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -200,7 +206,8 @@
                     android:id="@+id/ll_ProgreeBar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item">
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -221,7 +228,8 @@
                     android:id="@+id/ll_Calender"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item">
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -242,7 +250,8 @@
                     android:id="@+id/ll_TopFloat"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item">
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -263,7 +272,8 @@
                     android:id="@+id/ll_WeChatVideo"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item">
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -284,7 +294,8 @@
                     android:id="@+id/ll_Loadingview"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item">
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -305,7 +316,8 @@
                     android:id="@+id/ll_loadmore"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item">
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -326,7 +338,8 @@
                     android:id="@+id/ll_viewpagerBrowser"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item">
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"

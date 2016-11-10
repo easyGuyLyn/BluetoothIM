@@ -81,15 +81,15 @@
         <activity
             android:name=".main.DemoActivity"
             android:label="demo大全"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.hasActionBarDialog" />
         <activity
             android:name=".weixinPhotoPicker.WeixinPhotoPickerActivity"
             android:label="炫酷图库"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.hasActionBarDialog" />
         <activity
             android:name=".crop.CropMasterActivity"
             android:label="炫酷裁剪"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.hasActionBarDialog" />
         <activity
             android:name=".WeixinCrop.WeixinCropActivity"
             android:label="矩阵裁剪"
@@ -132,7 +132,7 @@
         <activity
             android:name=".loadingView.LoadingViewActivity"
             android:label="LoadingView"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.hasActionBarDialog" />
         <!-- LoadingView -->
         <!-- mvc加载更多 -->
         <activity
@@ -148,7 +148,7 @@
         <!-- EditText格式验证 -->
         <activity
             android:name=".editValtor.EditTextFormExampleActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.hasActionBarDialog" />
         <activity
             android:name=".editValtor.LayoutExampleActivity"
             android:theme="@style/AppTheme" />

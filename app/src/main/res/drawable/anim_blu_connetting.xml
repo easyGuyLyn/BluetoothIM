@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:drawable="@drawable/ic_spalsh_white"
+        android:duration="200"/>
+    <item
+        android:drawable="@drawable/ic_blu_conneting1"
+        android:duration="200"/>
+    <item
+        android:drawable="@drawable/ic_blutooth_conneting2"
+        android:duration="200"/>
+
+</animation-list>

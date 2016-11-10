@@ -56,12 +56,16 @@ import utils.Base64Utils;
 import utils.BaseActivity;
 import utils.CommonUtils;
 import utils.GsonUtil;
+import utils.PhotoScalUtil;
 import utils.TLogUtils;
 import utils.ThreadUtils;
 import utils.ToastUtils;
 
 public class BluetoothChatActivity extends BaseActivity {
-    // Debugging
+
+    /**
+     * 蓝牙
+     */
     private static final String TAG = "BluetoothChat";
     // Message types sent from the BluetoothChatService Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
@@ -85,22 +89,18 @@ public class BluetoothChatActivity extends BaseActivity {
     private BluetoothAdapter mBluetoothAdapter = null;
     // Member object for the chat services
     private BluetoothChatService mChatService = null;
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Bind(R.id.rv_speech)
-    RecyclerView rv_speech; //聊天列表
-    @Bind(R.id.rl_chat_control)
-    LinearLayout rl_chat_control;
-    @Bind(R.id.btn_send)
-    TextView btn_send; //发送按钮
-    //文字
+    /**
+     * 文字
+     */
     @Bind(R.id.edittext_layout)
     RelativeLayout edittext_layout;
     @Bind(R.id.et_sendmessage)
     MyChatEditText et_sendmessage;
     @Bind(R.id.btn_set_mode_keyboard)
     ImageView btn_set_mode_keyboard; //切换文字输入按钮
-    //语音
+    /**
+     * 语音
+     */
     @Bind(R.id.btn_press_to_speak)
     RelativeLayout btn_press_to_speak;
     @Bind(R.id.btn_set_mode_voice)
@@ -118,30 +118,50 @@ public class BluetoothChatActivity extends BaseActivity {
     public final static int VOICE_UP = 14;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 29;
     public static final int MY_PERMISSIONS_REQUEST_SYSTEM_ALERT_WINDOW = 30;
-    //底部隐藏部分
+    /**
+     * 底部
+     */
     @Bind(R.id.ll_footer_chat_activity_container)
     LinearLayout ll_footer_chat_activity_container;//底部展开的所有父容器
     @Bind(R.id.rl_footer_chat_activity_container_emo)
     RelativeLayout rl_footer_chat_activity_container_emo;//表情面板的容器
     @Bind(R.id.rl_footer_chat_activity_container_more)
     RelativeLayout rl_footer_chat_activity_container_more;//表情面板的容器
-    //表情
+    /**
+     * 表情
+     */
     @Bind(R.id.iv_emoticons)
     ImageView iv_emoticons; //表情按钮
     @Bind(R.id.cpi_footer_chat_activity_emo_indicator)
     CirclePageIndicator cip;  //ViewPager中的界面圆形界面指示器（第三方类库）
     @Bind(R.id.vp_footer_chat_activity_pager_emo)
     ViewPager pager_emo;  //layoutEmo中管理加载表情的界面的ViewPager
-    //更多
+    /**
+     * 更多
+     */
     @Bind(R.id.btn_more)
     ImageView btn_more; //更多按钮
     @Bind(R.id.cpi_footer_chat_activity_more_indicator)
     CirclePageIndicator cop;  //ViewPager中的界面圆形界面指示器（第三方类库）
     @Bind(R.id.vp_footer_chat_activity_pager_more)
     ViewPager pager_more;  //管理加载更多界面的ViewPager
+    //图片
     public static final int REQUEST_CAMERA_CODE = 10;
-    private ArrayList<String> imagePaths = new ArrayList<>(); //图片
-    //全局
+    private ArrayList<String> imagePaths = new ArrayList<>();
+    //小视频
+
+
+    /**
+     * 全局
+     */
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.rv_speech)
+    RecyclerView rv_speech; //聊天列表
+    @Bind(R.id.rl_chat_control)
+    LinearLayout rl_chat_control;
+    @Bind(R.id.btn_send)
+    TextView btn_send; //发送按钮
     private WaitDialog waitDialog;//发送消息等待框
     private ChatAdapter speechAdapter;//聊天列表适配器
     private List<BluChatMsgBean> mData = new ArrayList<>(); //消息数据源
@@ -226,15 +246,14 @@ public class BluetoothChatActivity extends BaseActivity {
                     switch (msg.arg1) {
                         /**蓝牙相关*/
                         case BluetoothChatService.STATE_CONNECTED:
-                            setStatus(getString(R.string.connecttedTo) + " " + mConnectedDeviceName);
-                            requestPermissoinUtils.requestSystemAlert(BluetoothChatActivity.this);
+                            setStatus(getString(R.string.connecttedTo) + " " + mConnectedDeviceName, BluetoothChatService.STATE_CONNECTING);
                             break;
                         case BluetoothChatService.STATE_CONNECTING:
-                            setStatus(getString(R.string.connectting));
+                            setStatus(getString(R.string.connectting), BluetoothChatService.STATE_CONNECTING);
                             break;
                         case BluetoothChatService.STATE_LISTEN:
                         case BluetoothChatService.STATE_NONE:
-                            setStatus(getString(R.string.notConnect));
+                            setStatus(getString(R.string.notConnect), BluetoothChatService.STATE_NONE);
                             break;
                     }
                     break;
@@ -343,7 +362,7 @@ public class BluetoothChatActivity extends BaseActivity {
         }
     }
 
-    public void setStatus(String status) {//设置此时蓝牙的连接状态在副标题上
+    public void setStatus(String status, int state) {//设置此时蓝牙的连接状态在副标题上,且展示不同的标志
         if (toolbar != null) {
             toolbar.setSubtitle(status);
         }
@@ -546,7 +565,7 @@ public class BluetoothChatActivity extends BaseActivity {
             return;
         }
         String filePath = filePaths.get(0);
-        sendBase64File(2, filePath, -1); //图片无时长
+        sendBase64File(2, PhotoScalUtil.scal(filePath).getAbsolutePath(), -1); //图片无时长
     }
 
     public void sendBase64File(final int type, final String filePath, final int length) {  //发送一个base64文件
