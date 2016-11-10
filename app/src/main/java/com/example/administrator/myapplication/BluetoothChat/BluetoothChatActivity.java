@@ -371,6 +371,7 @@ public class BluetoothChatActivity extends BaseActivity {
                 }
                 break;
             case REQUEST_CAMERA_CODE:
+                if (data == null) return;
                 sendPicMsg(data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT));
                 break;
         }
@@ -538,7 +539,10 @@ public class BluetoothChatActivity extends BaseActivity {
     }
 
     public void sendPicMsg(List<String> filePaths) { //发送一个图片
-        if (filePaths == null || filePaths.size() == 0) {
+        if (filePaths == null) {
+            return;
+        }
+        if (filePaths.size() == 0) {
             return;
         }
         String filePath = filePaths.get(0);

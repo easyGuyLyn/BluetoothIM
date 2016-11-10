@@ -144,11 +144,11 @@ public class ChatAdapter extends RecyclerView.Adapter {
                 break;
             case TYPE_PIC_SEND:
                 viewHolder.getTv(R.id.tv_name).setText("我");
-                ShowPicUtil.showPic(handler, mContext, message, pb_outgoing, iv_pic);
+                ShowPicUtil.showPic(0, handler, mContext, message, pb_outgoing, iv_pic);
                 break;
             case TYPE_PIC_RECEIVE:
                 viewHolder.getTv(R.id.tv_name).setText(connectDeviceName);
-                ShowPicUtil.showPic(handler, mContext, message, pb_outgoing, iv_pic);
+                ShowPicUtil.showPic(0, handler, mContext, message, pb_outgoing, iv_pic);
                 break;
         }
     }

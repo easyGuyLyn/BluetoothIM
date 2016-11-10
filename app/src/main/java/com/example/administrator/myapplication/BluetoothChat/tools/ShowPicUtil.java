@@ -1,5 +1,6 @@
 package com.example.administrator.myapplication.BluetoothChat.tools;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import java.util.Date;
 
 import utils.Base64Utils;
 import utils.FileUtil;
+import utils.LYNBitmapUtils;
 import utils.ThreadUtils;
 import utils.image.GlideUtils;
 
@@ -26,7 +28,7 @@ public class ShowPicUtil {
 
     public static final String EXTENSION = ".png";
 
-    public static void showPic(Handler handler, final Context mContext, final BluChatMsgBean message, final ProgressBar pb_outgoing, final ImageView iv_pic) {
+    public static void showPic(final int type, Handler handler, final Context mContext, final BluChatMsgBean message, final ProgressBar pb_outgoing, final ImageView iv_pic) {
 
         if (handler == null) {
             synchronized (Handler.class) {
@@ -39,7 +41,12 @@ public class ShowPicUtil {
                                 iv_pic.setVisibility(View.VISIBLE);
                                 pb_outgoing.setVisibility(View.GONE);
                                 String filePath = (String) msg.obj;
-                                GlideUtils.display(mContext, iv_pic, filePath);
+                                if (type == 0) {
+                                    GlideUtils.display(mContext, iv_pic, filePath);
+                                } else {
+                                    iv_pic.setImageBitmap(LYNBitmapUtils.getSampleSizeBitmap(filePath, (Activity) mContext));
+                                }
+
                             }
                         }
                     };
