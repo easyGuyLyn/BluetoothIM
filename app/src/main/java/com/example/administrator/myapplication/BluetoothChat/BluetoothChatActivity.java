@@ -52,6 +52,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import mabeijianxi.camera.MediaRecorderActivity;
 import utils.Base64Utils;
 import utils.BaseActivity;
 import utils.CommonUtils;
@@ -149,8 +150,9 @@ public class BluetoothChatActivity extends BaseActivity {
     public static final int REQUEST_CAMERA_CODE = 10;
     private ArrayList<String> imagePaths = new ArrayList<>();
     //小视频
-
-
+    private String videoScreenshot;//封面图的文件地址
+    private String videoUri;//录制的视频的文件地址
+    public static final int REQUEST_VIDEO_CODE = 11;
     /**
      * 全局
      */
@@ -390,8 +392,26 @@ public class BluetoothChatActivity extends BaseActivity {
                 }
                 break;
             case REQUEST_CAMERA_CODE:
-                if (data == null) return;
-                sendPicMsg(data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT));
+                if (resultCode == Activity.RESULT_OK) {
+                    sendPicMsg(data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT));
+                } else {
+                    ToastUtils.showMsg("未得到图片~~");
+                }
+
+                break;
+            case REQUEST_VIDEO_CODE:
+                if (resultCode == Activity.RESULT_OK) {
+                    if (data.getStringExtra(MediaRecorderActivity.VIDEO_URI) != null) {
+                        videoUri = data.getStringExtra(MediaRecorderActivity.VIDEO_URI);
+                        ToastUtils.showMsg(videoUri);
+                    }
+                    if (data.getStringExtra(MediaRecorderActivity.VIDEO_SCREENSHOT) != null) {
+                        videoScreenshot = data.getStringExtra(MediaRecorderActivity.VIDEO_SCREENSHOT);
+                        ToastUtils.showMsg(videoScreenshot);
+                    }
+                } else {
+                    ToastUtils.showMsg("未得到视频~~");
+                }
                 break;
         }
     }

@@ -1,2 +1,2 @@
-include ':app', 'HeadUpLibrary'
+include ':app', 'HeadUpLibrary', ':SmallVideoLib'
 include ':ViewPageIndictorlibrary'

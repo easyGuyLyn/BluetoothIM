@@ -90,21 +90,15 @@ public class PhotoPickerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photopicker);
-        Log.e("lyn","1");
         initViews();
-        Log.e("lyn","11");
         // 照片属性
         imageConfig = getIntent().getParcelableExtra(EXTRA_IMAGE_CONFIG);
-        Log.e("lyn","111");
         // 首次加载所有图片
         getSupportLoaderManager().initLoader(LOADER_ALL, null, mLoaderCallback);
-        Log.e("lyn","1111");
         // 选择图片数量
         mDesireImageCount = getIntent().getIntExtra(EXTRA_SELECT_COUNT, DEFAULT_MAX_TOTAL);
-        Log.e("lyn","11111");
         // 图片选择模式
         final int mode = getIntent().getExtras().getInt(EXTRA_SELECT_MODE, MODE_SINGLE);
-        Log.e("lyn","111111");
         // 默认选择
         if(mode == MODE_MULTI) {
             ArrayList<String> tmp = getIntent().getStringArrayListExtra(EXTRA_DEFAULT_SELECTED_LIST);
@@ -112,17 +106,12 @@ public class PhotoPickerActivity extends AppCompatActivity {
                 resultList.addAll(tmp);
             }
         }
-        Log.e("lyn","1111111");
         // 是否显示照相机
         mIsShowCamera = getIntent().getBooleanExtra(EXTRA_SHOW_CAMERA, false);
-        Log.e("lyn","11111111");
         mImageAdapter = new ImageGridAdapter(mCxt, mIsShowCamera, getItemImageWidth());
-        Log.e("lyn","111111111");
         // 是否显示选择指示器
         mImageAdapter.showSelectIndicator(mode == MODE_MULTI);
-        Log.e("lyn","1111111111");
         mGridView.setAdapter(mImageAdapter);
-        Log.e("lyn","11111111111");
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -149,9 +138,7 @@ public class PhotoPickerActivity extends AppCompatActivity {
                 }
             }
         });
-        Log.e("lyn","1111111111111111");
         mFolderAdapter = new FolderAdapter(mCxt);
-        Log.e("lyn","11111111111111111");
         // 打开相册列表
         btnAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,7 +157,6 @@ public class PhotoPickerActivity extends AppCompatActivity {
                 }
             }
         });
-        Log.e("lyn","1");
         // 预览
         btnPreview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,7 +167,6 @@ public class PhotoPickerActivity extends AppCompatActivity {
                 startActivityForResult(intent, PhotoPreviewActivity.REQUEST_PREVIEW);
             }
         });
-        Log.e("lyn","1");
     }
 
     private void initViews(){

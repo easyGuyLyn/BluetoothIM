@@ -21,6 +21,9 @@ import com.viewpagerindicator.CirclePageIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
+import mabeijianxi.camera.MediaRecorderActivity;
+import mabeijianxi.camera.model.MediaRecorderConfig;
+
 
 /**
  * Created by 46404 on 2016/11/9.
@@ -63,17 +66,30 @@ public class InitMoreViewTools {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 0:
+                    case 0:   //demo
                         Intent intent = new Intent(context, DemoActivity.class);
                         context.startActivity(intent);
                         break;
-                    case 1:
+                    case 1:   //图片
                         PhotoPickerIntent intent1 = new PhotoPickerIntent(context);
                         intent1.setSelectModel(SelectModel.MULTI);
                         intent1.setShowCarema(true); // 是否显示拍照
                         intent1.setMaxTotal(1); // 最多选择照片数量，默认为9
                         intent1.setSelectedPaths(imagePaths); // 已选中的照片地址， 用于回显选中状态
                         ((Activity) context).startActivityForResult(intent1, BluetoothChatActivity.REQUEST_CAMERA_CODE);
+                        break;
+                    case 2:   //小视频
+                        MediaRecorderConfig config = new MediaRecorderConfig.Buidler()
+                                .doH264Compress(true)
+                                .smallVideoWidth(480)
+                                .smallVideoHeight(360)
+                                .recordTimeMax(6 * 1000)
+                                .maxFrameRate(20)
+                                .minFrameRate(8)
+                                .captureThumbnailsTime(1)
+                                .recordTimeMin((int) (1.5 * 1000))
+                                .build();
+                        MediaRecorderActivity.goSmallVideoRecorder((Activity) context, BluetoothChatActivity.class.getName(), config, true, BluetoothChatActivity.REQUEST_VIDEO_CODE);
                         break;
 
                 }

@@ -1,9 +1,5 @@
 [
     {
-        "merged": "E:\\Android\\AndroidStudio_workspace\\MyApplication\\ViewPageIndictorlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\vpi__tab_indicator.xml",
-        "source": "E:\\Android\\AndroidStudio_workspace\\MyApplication\\ViewPageIndictorlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\vpi__tab_indicator.xml"
-    },
-    {
         "merged": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\ViewPageIndictorlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\vpi__tab_indicator.xml",
         "source": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\ViewPageIndictorlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\vpi__tab_indicator.xml"
     }

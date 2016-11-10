@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BluetoothIM.iml" filepath="$PROJECT_DIR$/BluetoothIM.iml" />
       <module fileurl="file://$PROJECT_DIR$/HeadUpLibrary/HeadUpLibrary.iml" filepath="$PROJECT_DIR$/HeadUpLibrary/HeadUpLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SmallVideoLib/SmallVideoLib.iml" filepath="$PROJECT_DIR$/SmallVideoLib/SmallVideoLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/ViewPageIndictorlibrary/ViewPageIndictorlibrary.iml" filepath="$PROJECT_DIR$/ViewPageIndictorlibrary/ViewPageIndictorlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
