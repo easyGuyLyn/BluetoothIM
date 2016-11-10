@@ -56,7 +56,6 @@ public class Base64Utils {
         FileOutputStream out = new FileOutputStream(savePath);
         out.write(buffer);
         out.close();
-        TLogUtils.d("lyn_fileSize", FileUtil.getFileSize(new File(savePath)) + "");
     }
 
 }

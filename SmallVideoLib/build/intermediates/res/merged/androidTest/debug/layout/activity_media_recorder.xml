@@ -59,17 +59,11 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <mabeijianxi.camera.views.ProgressView
-        android:id="@+id/record_progress"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_below="@+id/title_layout" />
-
     <RelativeLayout
         android:id="@+id/camera_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/record_progress">
+        android:layout_below="@+id/title_layout">
 
 
         <SurfaceView
@@ -84,9 +78,15 @@
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/record_progress"
+        android:layout_below="@+id/title_layout"
         android:layout_marginTop="300dip"
         android:background="@color/color_381902">
+
+        <mabeijianxi.camera.views.ProgressView
+            android:id="@+id/record_progress"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentTop="true" />
 
         <CheckedTextView
             android:id="@+id/record_delete"

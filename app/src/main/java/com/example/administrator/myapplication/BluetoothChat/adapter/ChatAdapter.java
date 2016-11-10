@@ -19,6 +19,7 @@ import com.example.administrator.myapplication.BluetoothChat.config.TimeShowUtil
 import com.example.administrator.myapplication.BluetoothChat.model.BluChatMsgBean;
 import com.example.administrator.myapplication.BluetoothChat.tools.GetVoiceFilePathUtil;
 import com.example.administrator.myapplication.BluetoothChat.tools.ShowPicUtil;
+import com.example.administrator.myapplication.BluetoothChat.tools.ShowVideoUtil;
 import com.example.administrator.myapplication.BluetoothChat.tools.VoiceClickPlayUtil;
 import com.example.administrator.myapplication.BluetoothChat.tools.VoiceRecorder;
 import com.example.administrator.myapplication.R;
@@ -37,6 +38,10 @@ public class ChatAdapter extends RecyclerView.Adapter {
     private static final int TYPE_VOICE_RECEIVE = 3;
     private static final int TYPE_PIC_SEND = 4;
     private static final int TYPE_PIC_RECEIVE = 5;
+    private static final int TYPE_VIDEO_SEND = 6;
+    private static final int TYPE_VIDEO_RECEIVE = 7;
+
+
     private Context mContext;
     private List<BluChatMsgBean> mData;
     private String mLocalDeviceName = null;
@@ -71,9 +76,11 @@ public class ChatAdapter extends RecyclerView.Adapter {
                 return TYPE_VOCICE_SEND;
             else
                 return TYPE_VOICE_RECEIVE;
-        } else {
-            // TODO: 2016/10/31   其他文件
-
+        } else if (msg.getContentType().equals("4")) { //视频
+            if (msg.getSender().equals(mLocalDeviceName))
+                return TYPE_VIDEO_SEND;
+            else
+                return TYPE_VIDEO_RECEIVE;
         }
         return super.getItemViewType(position);
     }
@@ -93,6 +100,10 @@ public class ChatAdapter extends RecyclerView.Adapter {
                 return new CommonViewHolder(View.inflate(mContext, R.layout.item_blu_chat_pic_send, null));
             case TYPE_PIC_RECEIVE:
                 return new CommonViewHolder(View.inflate(mContext, R.layout.item_blu_chat_pic_receive, null));
+            case TYPE_VIDEO_SEND:
+                return new CommonViewHolder(View.inflate(mContext, R.layout.item_blu_chat_video_send, null));
+            case TYPE_VIDEO_RECEIVE:
+                return new CommonViewHolder(View.inflate(mContext, R.layout.item_blu_chat_video_receive, null));
         }
 
         return null;
@@ -144,11 +155,19 @@ public class ChatAdapter extends RecyclerView.Adapter {
                 break;
             case TYPE_PIC_SEND:
                 viewHolder.getTv(R.id.tv_name).setText("我");
-                ShowPicUtil.showPic(0, handler, mContext, message, pb_outgoing, iv_pic);
+                ShowPicUtil.showPic(handler, mContext, message, pb_outgoing, iv_pic);
                 break;
             case TYPE_PIC_RECEIVE:
                 viewHolder.getTv(R.id.tv_name).setText(connectDeviceName);
-                ShowPicUtil.showPic(0, handler, mContext, message, pb_outgoing, iv_pic);
+                ShowPicUtil.showPic(handler, mContext, message, pb_outgoing, iv_pic);
+                break;
+            case TYPE_VIDEO_SEND:
+                viewHolder.getTv(R.id.tv_name).setText("我");
+                ShowVideoUtil.showVideo(handler, mContext, message, pb_outgoing, iv_pic);
+                break;
+            case TYPE_VIDEO_RECEIVE:
+                viewHolder.getTv(R.id.tv_name).setText(connectDeviceName);
+                ShowVideoUtil.showVideo(handler, mContext, message, pb_outgoing, iv_pic);
                 break;
         }
     }

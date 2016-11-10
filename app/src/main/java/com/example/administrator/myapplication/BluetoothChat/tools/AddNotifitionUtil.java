@@ -63,7 +63,7 @@ public class AddNotifitionUtil {
                             case "2":
                                 ProgressBar pb_outgoing1 = (ProgressBar) v.findViewById(R.id.pb_outgoing);//加载进度条
                                 ImageView iv_pic = (ImageView) v.findViewById(R.id.iv_pic);//图片
-                                ShowPicUtil.showPic(1, finalHandler, activity, msg, pb_outgoing1, iv_pic);
+                                ShowPicUtil.showPic(finalHandler, activity, msg, pb_outgoing1, iv_pic);
                                 break;
                             case "3":
                                 LinearLayout ll_voice_info = (LinearLayout) v.findViewById(R.id.ll_voice_info);//语音信息

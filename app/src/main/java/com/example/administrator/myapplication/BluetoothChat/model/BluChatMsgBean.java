@@ -13,11 +13,14 @@ public class BluChatMsgBean implements Serializable {
     private String sender;
     private String content;
     private String receiver;
-    private String contentType; // 0 包头 1 文字  2 图片 3 语音 4 其他
+    private String contentType; // 0 包头 1 文字  2 图片 3 语音 4 视频
 
     //分类字段
     private String voiceLength;//语音长度
+    private String coverFilePath;//视频封面文件地址
+    private String coverFileString;//视频封面文件Base64串
     private String filePath;//文件地址
+
 
     public BluChatMsgBean(String contentType, String receiver, String content, String time, String sender) {
         this.contentType = contentType;
@@ -73,6 +76,22 @@ public class BluChatMsgBean implements Serializable {
 
     public void setVoiceLength(String voiceLength) {
         this.voiceLength = voiceLength;
+    }
+
+    public String getCoverFileString() {
+        return coverFileString;
+    }
+
+    public void setCoverFileString(String coverFileString) {
+        this.coverFileString = coverFileString;
+    }
+
+    public String getCoverFilePath() {
+        return coverFilePath;
+    }
+
+    public void setCoverFilePath(String coverFilePath) {
+        this.coverFilePath = coverFilePath;
     }
 
     public String getFilePath() {

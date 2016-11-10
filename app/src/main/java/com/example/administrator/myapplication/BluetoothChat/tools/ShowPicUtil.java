@@ -2,12 +2,16 @@ package com.example.administrator.myapplication.BluetoothChat.tools;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.example.administrator.myapplication.BluetoothChat.ImageDetailActivity;
 import com.example.administrator.myapplication.BluetoothChat.config.CacheConfig;
 import com.example.administrator.myapplication.BluetoothChat.model.BluChatMsgBean;
 
@@ -28,7 +32,7 @@ public class ShowPicUtil {
 
     public static final String EXTENSION = ".png";
 
-    public static void showPic(final int type, Handler handler, final Context mContext, final BluChatMsgBean message, final ProgressBar pb_outgoing, final ImageView iv_pic) {
+    public static void showPic(Handler handler, final Context mContext, final BluChatMsgBean message, final ProgressBar pb_outgoing, final ImageView iv_pic) {
 
         if (handler == null) {
             synchronized (Handler.class) {
@@ -41,11 +45,7 @@ public class ShowPicUtil {
                                 iv_pic.setVisibility(View.VISIBLE);
                                 pb_outgoing.setVisibility(View.GONE);
                                 String filePath = (String) msg.obj;
-                                if (type == 0) {
-                                    GlideUtils.display(mContext, iv_pic, filePath);
-                                } else {
-                                    iv_pic.setImageBitmap(LYNBitmapUtils.getSampleSizeBitmap(filePath, (Activity) mContext));
-                                }
+                                GlideUtils.display(mContext, iv_pic, filePath);
                             }
                         }
                     };
@@ -82,6 +82,17 @@ public class ShowPicUtil {
             });
         }
 
+        //添加大图预览
+        final String finalSavepath1 = savepath;
+        iv_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ImageDetailActivity.class);
+                intent.putExtra(ImageDetailActivity.FILEPATH, finalSavepath1);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(iv_pic, iv_pic.getWidth() / 2, iv_pic.getHeight() / 2, 0, 0);
+                ActivityCompat.startActivity((Activity) mContext, intent, options.toBundle());
+            }
+        });
     }
 
     public static String getPicFilePath(Context context) {

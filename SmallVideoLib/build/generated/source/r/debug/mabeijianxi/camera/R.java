@@ -44,14 +44,14 @@ public final class R {
         public static int small_video_shoot=0x7f020015;
     }
     public static final class id {
-        public static int bottom_layout=0x7f060008;
-        public static int camera_layout=0x7f060006;
+        public static int bottom_layout=0x7f060007;
+        public static int camera_layout=0x7f060005;
         public static int record_camera_led=0x7f060002;
         public static int record_camera_switcher=0x7f060003;
         public static int record_controller=0x7f06000a;
         public static int record_delete=0x7f060009;
-        public static int record_preview=0x7f060007;
-        public static int record_progress=0x7f060005;
+        public static int record_preview=0x7f060006;
+        public static int record_progress=0x7f060008;
         public static int title_back=0x7f060001;
         public static int title_layout=0x7f060000;
         public static int title_next=0x7f060004;

@@ -47,6 +47,7 @@ import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.weixinPhotoPicker.photopicker.PhotoPickerActivity;
 import com.viewpagerindicator.CirclePageIndicator;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -403,12 +404,11 @@ public class BluetoothChatActivity extends BaseActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     if (data.getStringExtra(MediaRecorderActivity.VIDEO_URI) != null) {
                         videoUri = data.getStringExtra(MediaRecorderActivity.VIDEO_URI);
-                        ToastUtils.showMsg(videoUri);
                     }
                     if (data.getStringExtra(MediaRecorderActivity.VIDEO_SCREENSHOT) != null) {
                         videoScreenshot = data.getStringExtra(MediaRecorderActivity.VIDEO_SCREENSHOT);
-                        ToastUtils.showMsg(videoScreenshot);
                     }
+                    sendVideoMsg(videoUri, videoScreenshot);
                 } else {
                     ToastUtils.showMsg("未得到视频~~");
                 }
@@ -574,7 +574,7 @@ public class BluetoothChatActivity extends BaseActivity {
     }
 
     public void sendVoiceMsg(final String voiceFilePath, final int length) {//发送一条语音
-        sendBase64File(3, voiceFilePath, length);
+        sendBase64File(3, voiceFilePath, length, null);
     }
 
     public void sendPicMsg(List<String> filePaths) { //发送一个图片
@@ -585,10 +585,17 @@ public class BluetoothChatActivity extends BaseActivity {
             return;
         }
         String filePath = filePaths.get(0);
-        sendBase64File(2, PhotoScalUtil.scal(filePath).getAbsolutePath(), -1); //图片无时长
+        //图片无时长
+        sendBase64File(2, PhotoScalUtil.scal(filePath).getAbsolutePath(), -1, null);
     }
 
-    public void sendBase64File(final int type, final String filePath, final int length) {  //发送一个base64文件
+    public void sendVideoMsg(String videoFilePath, String converFilePath) { //发送一个小视频
+        if (videoFilePath == null) return;
+        //视频暂时不需要展示时长
+        sendBase64File(4, videoFilePath, -1, converFilePath);
+    }
+
+    public void sendBase64File(final int type, final String filePath, final int length, final String exraFilePath) {  //发送base64文件
         waitDialog.sendMsg();
         if (mChatService.getState() != BluetoothChatService.STATE_CONNECTED) {
             waitDialog.dismiss();
@@ -598,16 +605,24 @@ public class BluetoothChatActivity extends BaseActivity {
         ThreadUtils.newThread(new Runnable() {
             @Override
             public void run() {
-                String encode = null;
+                String encode = null;  //主文件
+                String enexraEncode = null;  //副文件 ,可以为空
                 try {
-                    encode = Base64Utils.encodeBase64File(filePath);   //语音暂时用Base64  问题不大
+                    if (new File(filePath).exists()) {
+                        encode = Base64Utils.encodeBase64File(filePath);   //暂时用Base64  问题不大
+                    }
+                    if (new File(exraFilePath).exists()) {
+                        enexraEncode = Base64Utils.encodeBase64File(exraFilePath);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (encode.length() > 0) {
+                if (null != encode && encode.length() > 0) {
                     BluChatMsgBean sendBean = new BluChatMsgBean(type + "", mConnectedDeviceName, encode, System.currentTimeMillis() + "", mLocalDeviceName);
                     sendBean.setFilePath(filePath);
                     sendBean.setVoiceLength(length + "");
+                    sendBean.setCoverFilePath(exraFilePath);
+                    sendBean.setCoverFileString(enexraEncode);
                     String json = GsonUtil.GsonString(sendBean);
                     mChatService.write(json, GetBytesWithHeadInfoUtil.getByteArry(json));
                 }

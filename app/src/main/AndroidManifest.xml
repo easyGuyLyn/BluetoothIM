@@ -208,6 +208,14 @@
         <activity
             android:name="mabeijianxi.camera.MediaRecorderActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".BluetoothChat.ImageDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".BluetoothChat.VideoPlayerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
         <!-- 蓝牙聊天 -->
         <!-- 应用保活 -->
         <activity
