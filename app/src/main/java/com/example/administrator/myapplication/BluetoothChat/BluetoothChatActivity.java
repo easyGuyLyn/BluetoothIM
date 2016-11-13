@@ -42,7 +42,6 @@ import com.example.administrator.myapplication.BluetoothChat.tools.InitEmoViewTo
 import com.example.administrator.myapplication.BluetoothChat.tools.InitMoreViewTools;
 import com.example.administrator.myapplication.BluetoothChat.tools.VocieTouchListener;
 import com.example.administrator.myapplication.BluetoothChat.tools.VoiceRecorder;
-import com.example.administrator.myapplication.BluetoothChat.tools.requestPermissoinUtils;
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.weixinPhotoPicker.photopicker.PhotoPickerActivity;
 import com.viewpagerindicator.CirclePageIndicator;

@@ -1,17 +1,13 @@
 package com.example.administrator.myapplication.BluetoothChat.tools;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.example.administrator.myapplication.BluetoothChat.ImageDetailActivity;
 import com.example.administrator.myapplication.BluetoothChat.VideoPlayerActivity;
 import com.example.administrator.myapplication.BluetoothChat.config.CacheConfig;
 import com.example.administrator.myapplication.BluetoothChat.model.BluChatMsgBean;
@@ -22,7 +18,6 @@ import java.util.Date;
 import utils.Base64Utils;
 import utils.FileUtil;
 import utils.GlideUtils;
-import utils.LYNBitmapUtils;
 import utils.TLogUtils;
 import utils.ThreadUtils;
 
@@ -88,6 +83,7 @@ public class ShowVideoUtil {
             VideoSavePath = message.getFilePath();
             pb_outgoing.setVisibility(View.GONE);
             iv_pic.setVisibility(View.VISIBLE);
+
         } else {
             final String finalVideoSavePath1 = VideoSavePath;
             final Handler finalHandler1 = handler;
@@ -95,7 +91,7 @@ public class ShowVideoUtil {
                 @Override
                 public void run() {
                     try {
-                        Base64Utils.decoderBase64File(message.getContent(), finalVideoSavePath1);
+                        Base64Utils.decoderBase64File(message.getContent(), finalVideoSavePath1); //视频得编码
                         message.setFilePath(finalVideoSavePath1);
                         Message msg = new Message();
                         msg.what = 2;
@@ -115,12 +111,6 @@ public class ShowVideoUtil {
                 Intent intent = new Intent(mContext, VideoPlayerActivity.class);
                 if (finalVideoSavePath == null) {
                     return;
-                }
-                TLogUtils.d("lyn____", finalVideoSavePath);
-                try {
-                    TLogUtils.d("lyn_fileSize", FileUtil.getFileSize(new File(finalVideoSavePath)) + "");
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
                 intent.putExtra("path", finalVideoSavePath);
                 mContext.startActivity(intent);

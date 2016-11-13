@@ -270,7 +270,7 @@
     <string name="title_other_devices" translatable="false">其他可用的设备</string>
     <string name="button_scan" translatable="false">寻找设备</string>
 
-    <string name="msg_msg_voice_press_speak">按住说话</string>
-    <string name="msg_msg_voice_do_cancel_send_1">手指上滑，取消发送</string>
-    <string name="msg_msg_voice_do_cancel_send_2">松开手指，取消发送</string>
+    <string name="msg_msg_voice_press_speak" translatable="false">按住说话</string>
+    <string name="msg_msg_voice_do_cancel_send_1" translatable="false">手指上滑，取消发送</string>
+    <string name="msg_msg_voice_do_cancel_send_2" translatable="false">松开手指，取消发送</string>
 </resources>

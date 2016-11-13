@@ -4,10 +4,15 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * 文件操作工具类
@@ -211,6 +216,156 @@ public class FileUtil {
             Log.e("获取文件大小", "文件不存在!");
         }
         return size;
+    }
+
+    /**
+     * 取得文件的编码
+     *
+     * @param path
+     */
+    public static void readFileCode(String path) {
+        try {
+
+            File file = new File(path);
+            FileInputStream input = new FileInputStream(file);
+            int pre = (input.read() << 8) + input.read();
+            String code = "US-ASCII";
+            switch (pre) {
+                case 0xefbb:
+                    if (input.read() == 0xbf) {
+                        code = "UTF-8";
+                    }
+                    break;
+                case 0xfffe:
+                    code = "Unicode";
+                    break;
+                case 0xfeff:
+                    code = "UTF-16BE";
+                    break;
+                default:
+                    code = "GBK";   // "US-ASCII"
+                    break;
+            }
+            TLogUtils.d("lyn____codeo", code);
+            System.out.println("CodeType: " + code);
+            input.close();
+
+            InputStreamReader reader = new InputStreamReader(new FileInputStream(file), code);
+            BufferedReader bufReader = new BufferedReader(reader);
+
+            String line;
+            while ((line = bufReader.readLine()) != null) {
+                System.out.print(line);
+            }
+
+            System.out.println("");
+            reader.close();
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 描述：从sd卡中的文件读取到byte[].
+     *
+     * @param path sd卡中文件路径
+     * @return byte[]
+     */
+    public static byte[] getByteArrayFromSD(String path) {
+        byte[] bytes = null;
+        ByteArrayOutputStream out = null;
+        try {
+            File file = new File(path);
+            //文件是否存在
+            if (!file.exists()) {
+                return null;
+            }
+
+            long fileSize = file.length();
+            if (fileSize > Integer.MAX_VALUE) {
+                return null;
+            }
+
+            FileInputStream in = new FileInputStream(path);
+            out = new ByteArrayOutputStream(1024);
+            byte[] buffer = new byte[1024];
+            int size = 0;
+            while ((size = in.read(buffer)) != -1) {
+                out.write(buffer, 0, size);
+            }
+            in.close();
+            bytes = out.toByteArray();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return bytes;
+    }
+
+    /**
+     * 描述：将byte数组写入文件.
+     *
+     * @param path    the path
+     * @param content the content
+     * @param create  the create
+     */
+    public static void writeByteArrayToSD(String path, byte[] content, boolean create) {
+
+        FileOutputStream fos = null;
+        try {
+            File file = new File(path);
+            //文件是否存在
+            if (!file.exists()) {
+                if (create) {
+                    File parent = file.getParentFile();
+                    if (!parent.exists()) {
+                        parent.mkdirs();
+                        file.createNewFile();
+                    }
+                } else {
+                    return;
+                }
+            }
+            fos = new FileOutputStream(path);
+            fos.write(content);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+    }
+
+    /**
+     * 描述：SD卡是否能用.
+     *
+     * @return true 可用,false不可用
+     */
+    public static boolean isCanUseSD() {
+        try {
+            return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

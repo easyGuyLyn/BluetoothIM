@@ -216,6 +216,14 @@
             android:name=".BluetoothChat.VideoPlayerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".BluetoothChat.FFmpegPreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".BluetoothChat.PlayVideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
         <!-- 蓝牙聊天 -->
         <!-- 应用保活 -->
         <activity
