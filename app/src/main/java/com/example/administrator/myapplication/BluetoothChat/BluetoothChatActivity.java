@@ -623,6 +623,7 @@ public class BluetoothChatActivity extends BaseActivity {
                     sendBean.setCoverFilePath(exraFilePath);
                     sendBean.setCoverFileString(enexraEncode);
                     String json = GsonUtil.GsonString(sendBean);
+                    TLogUtils.d("lyn_json", json);
                     mChatService.write(json, GetBytesWithHeadInfoUtil.getByteArry(json));
                 }
             }

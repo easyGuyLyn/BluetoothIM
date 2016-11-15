@@ -18,7 +18,6 @@ import java.util.Date;
 import utils.Base64Utils;
 import utils.FileUtil;
 import utils.GlideUtils;
-import utils.TLogUtils;
 import utils.ThreadUtils;
 
 /**
@@ -56,63 +55,63 @@ public class ShowVideoUtil {
         String ConverSavepath = getPicFilePath(mContext);//视频封面文件地址
         String VideoSavePath = getVideoFilePath(mContext);//视频文件地址
 
-        if (new File(message.getCoverFilePath()).exists()) { //封面逻辑
-            ConverSavepath = message.getCoverFilePath();
-            GlideUtils.display(mContext, iv_pic, ConverSavepath);
-        } else {
-            final Handler finalHandler = handler;
-            final String finalSavepath = ConverSavepath;
-            ThreadUtils.newThread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Base64Utils.decoderBase64File(message.getCoverFileString(), finalSavepath);
-                        message.setCoverFilePath(finalSavepath);
-                        Message msg = new Message();
-                        msg.what = 1;
-                        msg.obj = finalSavepath;
-                        finalHandler.sendMessage(msg);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+        if (null != message.getCoverFilePath()) {
+            if (new File(message.getCoverFilePath()).exists()) { //封面逻辑
+                ConverSavepath = message.getCoverFilePath();
+                GlideUtils.display(mContext, iv_pic, ConverSavepath);
+            } else {
+                final Handler finalHandler = handler;
+                final String finalSavepath = ConverSavepath;
+                ThreadUtils.newThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Base64Utils.decoderBase64File(message.getCoverFileString(), finalSavepath);
+                            message.setCoverFilePath(finalSavepath);
+                            Message msg = new Message();
+                            msg.what = 1;
+                            msg.obj = finalSavepath;
+                            finalHandler.sendMessage(msg);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
-        if (new File(message.getFilePath()).exists()) { //视频主体逻辑
-            VideoSavePath = message.getFilePath();
-            pb_outgoing.setVisibility(View.GONE);
-            iv_pic.setVisibility(View.VISIBLE);
+        if (null != message.getFilePath()) {
+            if (new File(message.getFilePath()).exists()) { //视频主体逻辑
+                VideoSavePath = message.getFilePath();
+                pb_outgoing.setVisibility(View.GONE);
+                iv_pic.setVisibility(View.VISIBLE);
 
-        } else {
-            final String finalVideoSavePath1 = VideoSavePath;
-            final Handler finalHandler1 = handler;
-            ThreadUtils.newThread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Base64Utils.decoderBase64File(message.getContent(), finalVideoSavePath1); //视频得编码
-                        message.setFilePath(finalVideoSavePath1);
-                        Message msg = new Message();
-                        msg.what = 2;
-                        msg.obj = finalVideoSavePath1;
-                        finalHandler1.sendMessage(msg);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+            } else {
+                final String finalVideoSavePath1 = VideoSavePath;
+                final Handler finalHandler1 = handler;
+                ThreadUtils.newThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Base64Utils.decoderBase64File(message.getContent(), finalVideoSavePath1);
+                            message.setFilePath(finalVideoSavePath1);
+                            Message msg = new Message();
+                            msg.what = 2;
+                            msg.obj = finalVideoSavePath1;
+                            finalHandler1.sendMessage(msg);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
-        final String finalVideoSavePath = VideoSavePath;
         iv_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, VideoPlayerActivity.class);
-                if (finalVideoSavePath == null) {
-                    return;
-                }
-                intent.putExtra("path", finalVideoSavePath);
+                intent.putExtra("path", message.getFilePath());
                 mContext.startActivity(intent);
             }
         });

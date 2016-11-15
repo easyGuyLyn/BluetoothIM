@@ -13,7 +13,7 @@ public class BluChatMsgBean implements Serializable {
     private String sender;
     private String content;
     private String receiver;
-    private String contentType; // 0 包头 1 文字  2 图片 3 语音 4 视频
+    private String contentType; //  1 文字  2 图片 3 语音 4 视频
 
     //分类字段
     private String voiceLength;//语音长度
