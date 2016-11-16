@@ -49,15 +49,16 @@
                 android:textSize="13dp"
                 android:textStyle="bold" />
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/iv_pic"
+
+            <mabeijianxi.camera.views.SurfaceVideoView
+                android:id="@+id/videoview"
                 android:layout_width="120dp"
                 android:layout_height="150dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_toLeftOf="@+id/tv_name"
-                android:src="@android:drawable/presence_video_online"
-                android:scaleType="fitXY"
+                android:fitsSystemWindows="true"
+                android:saveEnabled="true"
                 android:visibility="gone" />
 
             <ProgressBar

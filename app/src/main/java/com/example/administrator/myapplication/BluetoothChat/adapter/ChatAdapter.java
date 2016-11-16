@@ -26,6 +26,8 @@ import com.example.administrator.myapplication.R;
 
 import java.util.List;
 
+import mabeijianxi.camera.views.SurfaceVideoView;
+
 /**
  * Created by Administrator on 2016/10/4.
  */
@@ -127,7 +129,12 @@ public class ChatAdapter extends RecyclerView.Adapter {
         /**
          * 图片的视图
          */
-        ImageView iv_pic = viewHolder.getIv(R.id.iv_pic);
+        ImageView iv_pic = viewHolder.getIv(R.id.iv_pic);  //封面图
+
+        /**
+         * 小视频的视图
+         */
+        SurfaceVideoView svv = viewHolder.getSVV(R.id.videoview);//播放控件
 
 
         switch (getItemViewType(position)) {
@@ -163,11 +170,11 @@ public class ChatAdapter extends RecyclerView.Adapter {
                 break;
             case TYPE_VIDEO_SEND:
                 viewHolder.getTv(R.id.tv_name).setText("我");
-                ShowVideoUtil.showVideo(handler, mContext, message, pb_outgoing, iv_pic);
+                ShowVideoUtil.showVideo(handler, mContext, message, pb_outgoing, svv);
                 break;
             case TYPE_VIDEO_RECEIVE:
                 viewHolder.getTv(R.id.tv_name).setText(connectDeviceName);
-                ShowVideoUtil.showVideo(handler, mContext, message, pb_outgoing, iv_pic);
+                ShowVideoUtil.showVideo(handler, mContext, message, pb_outgoing, svv);
                 break;
         }
     }

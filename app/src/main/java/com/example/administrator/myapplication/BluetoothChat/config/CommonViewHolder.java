@@ -9,6 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import mabeijianxi.camera.views.SurfaceVideoView;
+
 /**
  * Created by Administrator on 2016/3/11.
  */
@@ -50,5 +52,9 @@ public class CommonViewHolder extends RecyclerView.ViewHolder {
 
     public LinearLayout getLl(int viewId) {
         return getView(viewId, LinearLayout.class);
+    }
+
+    public SurfaceVideoView getSVV(int viewId) {
+        return getView(viewId, SurfaceVideoView.class);
     }
 }

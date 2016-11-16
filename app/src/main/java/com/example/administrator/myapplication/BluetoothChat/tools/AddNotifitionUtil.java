@@ -35,10 +35,13 @@ public class AddNotifitionUtil {
                 contentLayoutId = R.layout.item_blu_chat_text_receive;
                 break;
             case "2":
-                contentLayoutId = R.layout.item_blu_chat_pic_receive;
+                contentLayoutId = R.layout.item_blu_chat_text_receive;
                 break;
             case "3":
                 contentLayoutId = R.layout.item_blu_chat_voice_receive;
+                break;
+            case "4":
+                contentLayoutId = R.layout.item_blu_chat_text_receive;
                 break;
         }
         final Handler finalHandler = handler;
@@ -46,7 +49,7 @@ public class AddNotifitionUtil {
                 msg.getSender(),
                 "一条新消息！！",
                 R.drawable.ic_app_bg,
-                contentLayoutId,      //如果不想有弹窗，这个参数就传 0  ，下面的回调方法也不用书写
+                contentLayoutId,//如果不想有弹窗，这个参数就传 0 ,下面的回调方法也不用书写;要弹窗, 传contentLayoutId ,但是支持还不好
                 isScreenOn,
                 new NotifitionManager.NotifitionSetView() {
                     @Override
@@ -61,9 +64,12 @@ public class AddNotifitionUtil {
                                 tv_text.setText(ChatMessageUtils.toSpannableString(activity, msg.getContent()));
                                 break;
                             case "2":
-                                ProgressBar pb_outgoing1 = (ProgressBar) v.findViewById(R.id.pb_outgoing);//加载进度条
-                                ImageView iv_pic = (ImageView) v.findViewById(R.id.iv_pic);//图片
-                                ShowPicUtil.showPic(finalHandler, activity, msg, pb_outgoing1, iv_pic);
+//                                ProgressBar pb_outgoing1 = (ProgressBar) v.findViewById(R.id.pb_outgoing);//加载进度条
+//                                ImageView iv_pic = (ImageView) v.findViewById(R.id.iv_pic);//图片
+//                                ShowPicUtil.showPic(finalHandler, activity, msg, pb_outgoing1, iv_pic);
+//                                v.invalidate();
+                                TextView tv_pic = (TextView) v.findViewById(R.id.tv_text);
+                                tv_pic.setText("【图片】");
                                 break;
                             case "3":
                                 LinearLayout ll_voice_info = (LinearLayout) v.findViewById(R.id.ll_voice_info);//语音信息
@@ -75,9 +81,11 @@ public class AddNotifitionUtil {
                                 String voiceFilePath1 = GetVoiceFilePathUtil.initVoice(displayMetrics, finalHandler, activity, msg, ll_voice_info, pb_outgoing, rl_voice_play);
                                 VoiceClickPlayUtil.doPlay(false, voiceRecorder, rl_voice_play, iv_audio, voiceFilePath1);
                                 break;
+                            case "4":
+                                TextView tv_video = (TextView) v.findViewById(R.id.tv_text);
+                                tv_video.setText("【视频】");
+                                break;
                         }
-
-
                     }
                 });
 

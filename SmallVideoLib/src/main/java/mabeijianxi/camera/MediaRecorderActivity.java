@@ -302,7 +302,7 @@ public class MediaRecorderActivity extends Activity implements
                         stopRecord();
 
                         // 检测是否已经完成   当小于最小就可以主动抬手发送
-                        if (mMediaObject.getDuration() >= RECORD_TIME_MIN) {
+                        if (mMediaObject.getDuration() >= RECORD_TIME_MAX) {
                             mTitleNext.performClick();
                         }
                     }

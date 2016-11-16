@@ -160,7 +160,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements
 
     @Override
     public void onStateChanged(boolean isPlaying) {
-        mPlayerStatus.setVisibility(isPlaying ? View.GONE : View.VISIBLE);
+     //   mPlayerStatus.setVisibility(isPlaying ? View.GONE : View.VISIBLE);
     }
 
     @Override
