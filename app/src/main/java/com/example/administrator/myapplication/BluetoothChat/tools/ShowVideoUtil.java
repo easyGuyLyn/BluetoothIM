@@ -98,7 +98,7 @@ public class ShowVideoUtil {
         svv.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                svv.setVolume(SurfaceVideoView.getSystemVolumn(context));
+                svv.setVolume(0);//不要声音
                 svv.start();
             }
         });
