@@ -14,6 +14,7 @@ import com.example.administrator.myapplication.BluetoothChat.adapter.MoreGridAda
 import com.example.administrator.myapplication.BluetoothChat.model.MoreBean;
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.main.DemoActivity;
+import com.example.administrator.myapplication.map.BasicMapActivity;
 import com.example.administrator.myapplication.weixinPhotoPicker.photopicker.SelectModel;
 import com.example.administrator.myapplication.weixinPhotoPicker.photopicker.intent.PhotoPickerIntent;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -40,9 +41,11 @@ public class InitMoreViewTools {
         MoreBean data1 = new MoreBean("demo", R.mipmap.ic_more_demo);
         MoreBean data2 = new MoreBean("图片", R.mipmap.ic_photo);
         MoreBean data3 = new MoreBean("小视频", R.mipmap.ic_vedio);
+        MoreBean data4 = new MoreBean("位置", R.mipmap.ic_locations);
         mores.add(data1);
         mores.add(data2);
         mores.add(data3);
+        mores.add(data4);
         /**
          *viewPager的页
          */
@@ -90,6 +93,10 @@ public class InitMoreViewTools {
                                 .recordTimeMin((int) (1.5 * 1000))
                                 .build();
                         MediaRecorderActivity.goSmallVideoRecorder((Activity) context, BluetoothChatActivity.class.getName(), config, true, BluetoothChatActivity.REQUEST_VIDEO_CODE);
+                        break;
+                    case 3:
+                        Intent intent2 = new Intent(context, BasicMapActivity.class);
+                        context.startActivity(intent2);
                         break;
 
                 }

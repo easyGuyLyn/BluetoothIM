@@ -234,6 +234,26 @@
             android:launchMode="singleInstance"
             android:process=":live"
             android:theme="@style/LiveActivityStyle"></activity>
+        <!-- 应用保活 -->
+
+
+        <!-- 高德地图 -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="6d8de9739c75e33973caa2ad1818709e"></meta-data>
+
+        <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+        <service android:name="com.amap.api.location.APSService"></service>
+
+        <activity
+            android:name=".map.BasicMapActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+
+
+        <!-- 高德地图 -->
+
+
     </application>
 
 </manifest>

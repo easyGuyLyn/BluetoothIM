@@ -38,4 +38,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile project(':HeadUpLibrary')
     compile project(':SmallVideoLib')
+    compile files('libs/Amap_2DMap_V2.9.2_20161026.jar')
 }
