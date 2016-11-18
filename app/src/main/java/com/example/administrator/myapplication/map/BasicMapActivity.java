@@ -169,10 +169,10 @@ public class BasicMapActivity extends AppCompatActivity implements LocationSourc
                 Log.e("AmapSuc_getLocationDT", aMapLocation.getLocationDetail());
                 Log.e("AmapSuc_getPoiName", aMapLocation.getPoiName());
                 Log.e("AmapSuc_getAoiName", aMapLocation.getAoiName());
-                Log.e("AmapSuc_getLatitude", aMapLocation.getLatitude()+"");//纬度
-                Log.e("AmapSuc_getAltitude", aMapLocation.getAltitude()+"");//海拔
-                Log.e("AmapSuc_getAccuracy", aMapLocation.getAccuracy()+"");//经度
-                mlocationClient.stopLocation();//暂时关掉
+                Log.e("AmapSuc_getLatitude", aMapLocation.getLatitude() + "");//纬度
+                Log.e("AmapSuc_getAltitude", aMapLocation.getAltitude() + "");//海拔
+                Log.e("AmapSuc_getAccuracy", aMapLocation.getAccuracy() + "");//经度
+                deactivate();//暂时关掉
             } else {
                 String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
                 Log.e("AmapErr", errText);
@@ -185,7 +185,7 @@ public class BasicMapActivity extends AppCompatActivity implements LocationSourc
      */
     @Override
     public void activate(OnLocationChangedListener onLocationChangedListener) {
-        TLogUtils.d("lyn","activate");
+        TLogUtils.d("lyn", "activate");
         mListener = onLocationChangedListener;
         if (mlocationClient == null) {
             mlocationClient = new AMapLocationClient(this);
