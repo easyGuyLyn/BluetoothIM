@@ -348,21 +348,10 @@ public class BluetoothChatActivity extends BaseActivity {
             serverIntent = new Intent(this, DeviceListActivity.class);
             startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_INSECURE);
             return true;
-        } else if (id == R.id.discoverable) {
-            ensureDiscoverable();
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void ensureDiscoverable() {//重新搜索设备
-        Log.d(TAG, "ensure discoverable");
-        if (mBluetoothAdapter.getScanMode() != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
-            Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-            discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
-            startActivity(discoverableIntent);
-        }
-    }
 
     public void setStatus(String status, int state) {//设置此时蓝牙的连接状态在副标题上,且展示不同的标志
         if (toolbar != null) {

@@ -13,9 +13,5 @@
         android:icon="@android:drawable/ic_menu_search"
         android:showAsAction="ifRoom|withText"
         android:title="连接设备--insecure" />
-    <item
-        android:id="@+id/discoverable"
-        android:icon="@android:drawable/ic_menu_mylocation"
-        android:showAsAction="ifRoom|withText"
-        android:title="寻找设备" />
+
 </menu>
