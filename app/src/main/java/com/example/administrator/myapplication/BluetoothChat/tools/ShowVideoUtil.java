@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -20,6 +21,7 @@ import mabeijianxi.camera.util.DeviceUtils;
 import mabeijianxi.camera.views.SurfaceVideoView;
 import utils.Base64Utils;
 import utils.FileUtil;
+import utils.TLogUtils;
 import utils.ThreadUtils;
 import utils.ToastUtils;
 
@@ -54,14 +56,17 @@ public class ShowVideoUtil {
 
         String VideoSavePath = getVideoFilePath(mContext);//视频文件地址
 
+
         //视频主体逻辑
         if (null != message.getFilePath()) {
             if (new File(message.getFilePath()).exists()) { //如果本地已经有了
                 pb_outgoing.setVisibility(View.GONE);
                 svv.setVisibility(View.VISIBLE);
+                VideoSavePath = message.getFilePath();
                 initSurfaceVideoView(svv, message.getFilePath(), mContext);
 
-            } else {   //从json里拿
+            } else {
+                //从json里拿
                 final String finalVideoSavePath1 = VideoSavePath;
                 final Handler finalHandler1 = handler;
                 ThreadUtils.newThread(new Runnable() {
@@ -93,12 +98,14 @@ public class ShowVideoUtil {
     }
 
 
-    private static void initSurfaceVideoView(final SurfaceVideoView svv, String VideoSavePath, final Context context) {
+    private static void initSurfaceVideoView(final SurfaceVideoView svv, final String VideoSavePath, final Context context) {
+        TLogUtils.d("lyn_init", "init: " + VideoSavePath);
 
         svv.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 svv.setVolume(0);//不要声音
+                TLogUtils.d("lyn_onPrepared", VideoSavePath);
                 svv.start();
             }
         });
@@ -117,6 +124,7 @@ public class ShowVideoUtil {
                 switch (what) {
                     case MediaPlayer.MEDIA_INFO_BAD_INTERLEAVING:
                         // 音频和视频数据不正确
+                        TLogUtils.d("lyn", "音频和视频数据不正确");
                         break;
                     case MediaPlayer.MEDIA_INFO_BUFFERING_START:
                         if (!((Activity) context).isFinishing())
@@ -150,10 +158,10 @@ public class ShowVideoUtil {
 
 
     public static String getPicFilePath(Context context) {
-        return FileUtil.getDiskFileDir(context, CacheConfig.PIC_BLU) + "/" + new Date() + EXTENSION;
+        return FileUtil.getDiskFileDir(context, CacheConfig.PIC_BLU) + "/" + System.currentTimeMillis() + EXTENSION;
     }
 
     public static String getVideoFilePath(Context context) {
-        return FileUtil.getDiskFileDir(context, CacheConfig.VIDEO_BLU) + "/" + new Date() + EXTENSION1;
+        return FileUtil.getDiskFileDir(context, CacheConfig.VIDEO_BLU) + "/" + System.currentTimeMillis() + EXTENSION1;
     }
 }

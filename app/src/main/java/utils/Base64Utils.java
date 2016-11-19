@@ -62,7 +62,7 @@ public class Base64Utils {
      * @since JDK 1.6
      */
     public static void decoderBase64File(String base64Code, String savePath) throws Exception {
-        TLogUtils.d("lyn_savePath", savePath);
+        TLogUtils.d("lyn_savePath_decoderBase64File", savePath);
         //byte[] buffer = new BASE64Decoder().decodeBuffer(base64Code);
         byte[] buffer = Base64.decode(base64Code, Base64.DEFAULT);
         FileOutputStream out = new FileOutputStream(savePath);
