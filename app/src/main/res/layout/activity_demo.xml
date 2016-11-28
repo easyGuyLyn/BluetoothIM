@@ -159,6 +159,28 @@
                     android:background="@color/colorPrimaryDark"></View>
 
                 <LinearLayout
+                    android:id="@+id/ll_jsBrige"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:background="@drawable/selector_listview_item"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="jsBrige"
+                        android:textSize="@dimen/item_text_size"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"></View>
+
+                <LinearLayout
                     android:id="@+id/ll_EditTextVator"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height"

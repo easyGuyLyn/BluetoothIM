@@ -15,6 +15,7 @@ import com.example.administrator.myapplication.WeixinCrop.WeixinCropActivity;
 import com.example.administrator.myapplication.calender.CalederActivity;
 import com.example.administrator.myapplication.crop.CropMasterActivity;
 import com.example.administrator.myapplication.editValtor.EditTextFormExampleActivity;
+import com.example.administrator.myapplication.jsBrige.JsBrigeActivity;
 import com.example.administrator.myapplication.loadingView.LoadingViewActivity;
 import com.example.administrator.myapplication.mvcHelper.MovieDetailActivity;
 import com.example.administrator.myapplication.mvcHelper.UltraActivity;
@@ -87,6 +88,12 @@ public class DemoActivity extends AppCompatActivity {
     @OnClick(R.id.ll_JellyViewPager)
     public void JellyViewPager() {
         Intent intent = new Intent(DemoActivity.this, JellyViewPagerActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.ll_jsBrige)
+    public void js() {
+        Intent intent = new Intent(DemoActivity.this, JsBrigeActivity.class);
         startActivity(intent);
     }
 

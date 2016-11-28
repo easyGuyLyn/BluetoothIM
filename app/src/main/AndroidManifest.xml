@@ -235,6 +235,13 @@
             android:process=":live"
             android:theme="@style/LiveActivityStyle"></activity>
         <!-- 应用保活 -->
+        <!-- js -->
+
+        <activity
+            android:name=".jsBrige.JsBrigeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <!-- js -->
 
 
         <!-- 高德地图 -->
@@ -249,7 +256,6 @@
             android:name=".map.BasicMapActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"></activity>
-
 
         <!-- 高德地图 -->
 

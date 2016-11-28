@@ -56,12 +56,12 @@
         "source": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_delete_check_press.png"
     },
     {
-        "merged": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_next_normal.png",
-        "source": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_next_normal.png"
-    },
-    {
         "merged": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_on_disable.png",
         "source": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_on_disable.png"
+    },
+    {
+        "merged": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_next_normal.png",
+        "source": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_next_normal.png"
     },
     {
         "merged": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_on_normal.png",
