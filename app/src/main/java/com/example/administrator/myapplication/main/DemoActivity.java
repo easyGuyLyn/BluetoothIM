@@ -139,10 +139,6 @@ public class DemoActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @OnClick(R.id.ll_viewpagerBrowser)
-    public void ll_viewpagerBrowser() {
-
-    }
 
     public void onRefresh() {
         mPtrFrameLayout.postDelayed(new Runnable() {

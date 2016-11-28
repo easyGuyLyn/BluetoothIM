@@ -334,28 +334,6 @@
                     android:layout_height="1dp"
                     android:background="@color/colorPrimaryDark"></View>
 
-                <LinearLayout
-                    android:id="@+id/ll_viewpagerBrowser"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/item_height"
-                    android:background="@drawable/selector_listview_item"
-                    android:padding="15dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="viewpagerBroser"
-                        android:textSize="@dimen/item_text_size"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimaryDark"></View>
-
             </LinearLayout>
         </ScrollView>
     </com.example.administrator.myapplication.ultraPullToRefresh.ultra.PtrClassicFrameLayout>
