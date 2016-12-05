@@ -18,6 +18,8 @@ import com.lyn.easy.mylibrary.js.BridgeWebView;
 import com.lyn.easy.mylibrary.js.CallBackFunction;
 import com.lyn.easy.mylibrary.js.DefaultHandler;
 
+import utils.TLogUtils;
+
 public class JsBrigeActivity extends AppCompatActivity implements OnClickListener {
 
     private final String TAG = "JsBrigeActivity";
@@ -92,7 +94,7 @@ public class JsBrigeActivity extends AppCompatActivity implements OnClickListene
         webView.callHandler("functionInJs", new Gson().toJson(user), new CallBackFunction() {
             @Override
             public void onCallBack(String data) {
-
+                TLogUtils.i(TAG, data);
             }
         });
         webView.send("hello");
