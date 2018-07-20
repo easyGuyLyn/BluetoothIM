@@ -23,7 +23,7 @@ public class HeadsUp {
     /**
      * 出现时间  单位是 second
      */
-    private long duration = 9;
+    private long duration = 2;
     /**
      *
      */

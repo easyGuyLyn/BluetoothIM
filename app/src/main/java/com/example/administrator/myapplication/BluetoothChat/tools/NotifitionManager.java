@@ -51,11 +51,13 @@ public class NotifitionManager {
         PendingIntent pendingIntent = PendingIntent.getActivity(activity, 11, new Intent(activity, activity.getClass()), PendingIntent.FLAG_UPDATE_CURRENT);
         final HeadsUpManager manage1 = HeadsUpManager.getInstant(activity.getApplication());
         HeadsUp headsUp1 = new HeadsUp.Builder(activity)
-                .setContentTitle(title).setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS)
+                .setContentTitle(title)
+                .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS)
                 //要显示通知栏通知,这个一定要设置
                 .setSmallIcon(icon)
                 //2.3 一定要设置这个参数,负责会报错
                 .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
                 .setContentText(content)
                 .buildHeadUp();
         if (custom != 0) {

@@ -2,33 +2,26 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item>
-        <shape
-            >
+        <shape>
 
             <padding
                 android:bottom="9dp"
                 android:left="6dp"
-                android:right="6dp"
-                >
-                </padding>
+                android:right="6dp"></padding>
             <solid
 
-                android:color="@color/transparency"
-                >
+                android:color="@color/transparency">
 
             </solid>
         </shape>
     </item>
     <item>
         <shape>
-            <corners android:radius="2dp">
-            </corners>
+            <corners android:radius="2dp"></corners>
             <solid android:color="@color/white">
 
             </solid>
-            <padding
-                android:bottom="2dp"
-                ></padding>
+            <padding android:bottom="2dp"></padding>
         </shape>
     </item>
 

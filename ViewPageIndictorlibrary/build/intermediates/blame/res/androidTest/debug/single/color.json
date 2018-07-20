@@ -1,10 +1,18 @@
 [
     {
-        "merged": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\ViewPageIndictorlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__light_theme.xml",
-        "source": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\ViewPageIndictorlibrary\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__light_theme.xml"
+        "merged": "/home/archar/AndroidStudioProjects/BluetoothIM/E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\ViewPageIndictorlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__light_theme.xml",
+        "source": "/home/archar/AndroidStudioProjects/BluetoothIM/E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\ViewPageIndictorlibrary\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__light_theme.xml"
     },
     {
-        "merged": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\ViewPageIndictorlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__dark_theme.xml",
-        "source": "E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\ViewPageIndictorlibrary\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__dark_theme.xml"
+        "merged": "/home/archar/AndroidStudioProjects/BluetoothIM/E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\ViewPageIndictorlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__dark_theme.xml",
+        "source": "/home/archar/AndroidStudioProjects/BluetoothIM/E:\\IT\\Android_\\as_collect\\gitHub\\BluetoothIM\\BluetoothIM\\ViewPageIndictorlibrary\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__dark_theme.xml"
+    },
+    {
+        "merged": "/home/archar/AndroidStudioProjects/BluetoothIM/ViewPageIndictorlibrary/build/intermediates/res/merged/androidTest/debug/color/vpi__dark_theme.xml",
+        "source": "/home/archar/AndroidStudioProjects/BluetoothIM/ViewPageIndictorlibrary/build/intermediates/bundles/debug/res/color/vpi__dark_theme.xml"
+    },
+    {
+        "merged": "/home/archar/AndroidStudioProjects/BluetoothIM/ViewPageIndictorlibrary/build/intermediates/res/merged/androidTest/debug/color/vpi__light_theme.xml",
+        "source": "/home/archar/AndroidStudioProjects/BluetoothIM/ViewPageIndictorlibrary/build/intermediates/bundles/debug/res/color/vpi__light_theme.xml"
     }
 ]

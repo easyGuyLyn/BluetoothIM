@@ -68,7 +68,7 @@ public class CircleImageView extends ImageView {
         this(context, attrs, 0);
     }
 
-    private int paddingTop,paddingLeft,paddingRight,paddingBottom;
+    private int paddingTop, paddingLeft, paddingRight, paddingBottom;
 
     public CircleImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -77,17 +77,17 @@ public class CircleImageView extends ImageView {
 
         mBorderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_border_width, DEFAULT_BORDER_WIDTH);
         mBorderColorStateList = a.getColorStateList(R.styleable.CircleImageView_border_color);
-        if(mBorderColorStateList!=null) {
+        if (mBorderColorStateList != null) {
             mBorderColor = mBorderColorStateList.getColorForState(getDrawableState(), Color.WHITE);
-        }else{
-            mBorderColor=Color.WHITE;
+        } else {
+            mBorderColor = Color.WHITE;
         }
         a.recycle();
 
-        paddingTop=getPaddingTop();
-        paddingLeft=getPaddingLeft();
-        paddingRight=getPaddingRight();
-        paddingBottom=getPaddingBottom();
+        paddingTop = getPaddingTop();
+        paddingLeft = getPaddingLeft();
+        paddingRight = getPaddingRight();
+        paddingBottom = getPaddingBottom();
 
 
         init();
@@ -127,12 +127,12 @@ public class CircleImageView extends ImageView {
         if (getDrawable() == null) {
             return;
         }
-        canvas.drawCircle(paddingLeft+(getWidth()-paddingRight-paddingLeft) / 2, paddingTop+(getHeight()-paddingTop-paddingBottom )/ 2, mDrawableRadius, mBitmapPaint);
+        canvas.drawCircle(paddingLeft + (getWidth() - paddingRight - paddingLeft) / 2, paddingTop + (getHeight() - paddingTop - paddingBottom) / 2, mDrawableRadius, mBitmapPaint);
         if (mBorderWidth != 0) {
 
             mBorderPaint.setColor(mBorderColor);
             canvas.drawCircle(
-                    paddingLeft+(getWidth()-paddingRight-paddingLeft) / 2, paddingTop+(getHeight()-paddingTop-paddingBottom )/ 2
+                    paddingLeft + (getWidth() - paddingRight - paddingLeft) / 2, paddingTop + (getHeight() - paddingTop - paddingBottom) / 2
                     , mBorderRadius, mBorderPaint);
         }
     }
@@ -141,18 +141,18 @@ public class CircleImageView extends ImageView {
     public boolean onTouchEvent(MotionEvent event) {
 
 
-        if(mBorderColorStateList ==null || !isClickable()){
+        if (mBorderColorStateList == null || !isClickable()) {
             return super.onTouchEvent(event);
         }
 
-        switch (event.getAction()){
-            case  MotionEvent.ACTION_UP:
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-                mBorderColor=mBorderColorStateList.getDefaultColor();
+                mBorderColor = mBorderColorStateList.getDefaultColor();
                 break;
 
             default:
-                    mBorderColor = mBorderColorStateList.getColorForState(getDrawableState(), Color.WHITE);
+                mBorderColor = mBorderColorStateList.getColorForState(getDrawableState(), Color.WHITE);
 
                 break;
         }
@@ -251,7 +251,7 @@ public class CircleImageView extends ImageView {
             }
 
             Canvas canvas = new Canvas(bitmap);
-            drawable.setBounds(paddingLeft, paddingTop, canvas.getWidth()-paddingRight, canvas.getHeight()-paddingBottom);
+            drawable.setBounds(paddingLeft, paddingTop, canvas.getWidth() - paddingRight, canvas.getHeight() - paddingBottom);
             drawable.draw(canvas);
             return bitmap;
         } catch (OutOfMemoryError e) {
@@ -282,11 +282,11 @@ public class CircleImageView extends ImageView {
         mBitmapHeight = mBitmap.getHeight();
         mBitmapWidth = mBitmap.getWidth();
 
-        mBorderRect.set(paddingLeft, paddingTop, getWidth()-paddingRight, getHeight()-paddingBottom);
-        mBorderRadius = Math.min((mBorderRect.height()-mBorderWidth) / 2,( mBorderRect.width()-mBorderWidth)  / 2);
+        mBorderRect.set(paddingLeft, paddingTop, getWidth() - paddingRight, getHeight() - paddingBottom);
+        mBorderRadius = Math.min((mBorderRect.height() - mBorderWidth) / 2, (mBorderRect.width() - mBorderWidth) / 2);
 
 
-        mDrawableRect.set(mBorderWidth+paddingLeft, mBorderWidth+paddingTop, getWidth()-paddingRight - mBorderWidth, getHeight()-paddingBottom - mBorderWidth);
+        mDrawableRect.set(mBorderWidth + paddingLeft, mBorderWidth + paddingTop, getWidth() - paddingRight - mBorderWidth, getHeight() - paddingBottom - mBorderWidth);
         mDrawableRadius = Math.min(mDrawableRect.height() / 2, mDrawableRect.width() / 2);
 
         Log.e("mDrawableRadius", mDrawableRadius + "");
@@ -310,7 +310,7 @@ public class CircleImageView extends ImageView {
         }
 
         mShaderMatrix.setScale(scale, scale);
-        mShaderMatrix.postTranslate((int) (dx + 0.5f) +paddingLeft+ mBorderWidth, (int) (dy + 0.5f) + paddingTop+mBorderWidth);
+        mShaderMatrix.postTranslate((int) (dx + 0.5f) + paddingLeft + mBorderWidth, (int) (dy + 0.5f) + paddingTop + mBorderWidth);
 
         mBitmapShader.setLocalMatrix(mShaderMatrix);
     }
